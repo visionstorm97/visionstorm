@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d1a">
+  <meta name="description" content="Welcome to Vision Storm. Ideas into innovation.">
+  <title>Vision Storm | Welcome</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #ffffff;
+      background:
+        radial-gradient(ellipse at 50% 20%, #29205b 0%, transparent 55%),
+        linear-gradient(145deg, #080d1a, #11172b 65%, #090d19);
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .logo span {
+      color: #9285ff;
+    }
+
+    .domain {
+      color: #aab4d0;
+      font-size: 14px;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 60px 24px 100px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 9px 16px;
+      border: 1px solid #7467d8;
+      border-radius: 30px;
+      color: #c5bdff;
+      font-size: 12px;
+      letter-spacing: 2px;
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      max-width: 900px;
+      font-size: clamp(42px, 8vw, 82px);
+      line-height: 1.08;
+      letter-spacing: -3px;
+      margin-bottom: 24px;
+    }
+
+    h1 span {
+      background: linear-gradient(90deg, #a99bff, #67d9ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .intro {
+      max-width: 580px;
+      color: #bac3d8;
+      font-size: 18px;
+      line-height: 1.8;
+      margin-bottom: 34px;
+    }
+
+    .button {
+      display: inline-block;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(100deg, #7158ef, #526be9);
+      padding: 16px 28px;
+      border-radius: 10px;
+      font-weight: 700;
+      box-shadow: 0 8px 35px #6655e344;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px #6655e366;
+    }
+
+    footer {
+      padding: 24px;
+      text-align: center;
+      color: #77829e;
+      font-size: 13px;
+      border-top: 1px solid #ffffff12;
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 24px 6%;
+      }
+
+      .logo {
+        font-size: 16px;
+        letter-spacing: 1px;
+      }
+
+      .domain {
+        font-size: 12px;
+      }
+
+      h1 {
+        letter-spacing: -1.5px;
+      }
+
+      .intro {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">VISION <span>STORM</span></div>
+    <div class="domain">visionstorm.sa</div>
+  </header>
+
+  <main>
+    <div class="tag">A NEW VISION BEGINS</div>
+
+    <h1>Welcome to<br><span>Vision Storm</span></h1>
+
+    <p class="intro">
+      Ideas into innovation.
+      A new digital experience is taking shape.
+      We're glad you're here.
+    </p>
+
+    <a class="button" href="mailto:info@visionstorm.sa">
+      Get in Touch ↗
+    </a>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Vision Storm. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
