@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Vision Storm | Next-Gen Printing</title>
     
-    <!-- Modern Fonts -->
+    <!-- Exclusive Fonts: Bodoni Moda (Luxury Serif), Outfit (Modern Sans), Tajawal (Premium Arabic) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Plus+Jakarta+Sans:wght@400;600;800&family=Syne:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -26,8 +26,12 @@
             --border: rgba(255, 255, 255, 0.08);
             --whatsapp: #25D366;
             --call-color: #007AFF;
-            --logo-bg: #ffffff;
             --map-filter: invert(90%) hue-rotate(180deg) contrast(1.2);
+            
+            /* Logo Settings for Dark Mode: Transparent */
+            --logo-bg: transparent;
+            --logo-padding: 0;
+            --logo-filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.1));
         }
 
         body.light-mode {
@@ -38,10 +42,14 @@
             --text-main: #111111;
             --text-muted: #555566;
             --border: rgba(0, 0, 0, 0.08);
-            --logo-bg: #111111;
             --map-filter: grayscale(100%) contrast(1.1);
             --accent-glow: rgba(229, 178, 93, 0.2);
             --call-color: #007AFF;
+            
+            /* Logo Settings for Light Mode: Black Box */
+            --logo-bg: #000000;
+            --logo-padding: 8px 15px;
+            --logo-filter: none;
         }
 
         * {
@@ -55,15 +63,16 @@
         body {
             background-color: var(--bg-main);
             color: var(--text-main);
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Outfit', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        body[dir="rtl"] { font-family: 'Cairo', sans-serif; }
+        body[dir="rtl"] { font-family: 'Tajawal', sans-serif; }
 
-        h1, h2, h3 { font-family: 'Syne', sans-serif; }
-        body[dir="rtl"] h1, body[dir="rtl"] h2, body[dir="rtl"] h3 { font-family: 'Cairo', sans-serif; }
+        /* Exclusive Serif for Headings */
+        h1, h2, h3 { font-family: 'Bodoni Moda', serif; font-weight: 600; }
+        body[dir="rtl"] h1, body[dir="rtl"] h2, body[dir="rtl"] h3 { font-family: 'Tajawal', sans-serif; font-weight: 800; }
 
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
@@ -84,16 +93,19 @@
         
         body.light-mode header { background: rgba(244, 244, 246, 0.8); }
 
+        /* Logo Styling Logic */
         .logo-container img {
             height: 40px;
             background: var(--logo-bg);
-            padding: 4px 12px;
-            border-radius: 6px;
+            padding: var(--logo-padding);
+            border-radius: 8px;
             object-fit: contain;
+            filter: var(--logo-filter);
+            transition: all 0.3s ease;
         }
 
         .desktop-nav { display: none; gap: 30px; }
-        .desktop-nav a { color: var(--text-main); text-decoration: none; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .desktop-nav a { color: var(--text-main); text-decoration: none; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; }
         .desktop-nav a:hover { color: var(--accent); }
 
         .header-controls { display: flex; gap: 10px; align-items: center; }
@@ -110,7 +122,7 @@
         }
         .icon-btn:hover { background: var(--bg-card-hover); border-color: var(--accent); color: var(--accent); }
         
-        .lang-btn { width: auto; padding: 0 15px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; }
+        .lang-btn { width: auto; padding: 0 15px; border-radius: 20px; font-weight: 600; font-size: 0.85rem; font-family: 'Outfit', sans-serif; }
 
         .hero {
             min-height: 100vh;
@@ -127,26 +139,31 @@
         }
 
         .hero-logo {
-            width: 200px;
+            width: 220px;
             background: var(--logo-bg);
-            padding: 15px;
+            padding: var(--logo-padding);
             border-radius: 12px;
             margin-bottom: 30px;
             animation: float 6s ease-in-out infinite;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            filter: var(--logo-filter);
+            transition: all 0.3s ease;
         }
 
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 5rem); line-height: 1.1; margin-bottom: 20px; }
-        .hero h1 span { color: var(--accent); }
-        .hero p { font-size: clamp(1rem, 3vw, 1.2rem); color: var(--text-muted); max-width: 600px; margin: 0 auto 40px; }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 5.5rem); line-height: 1.1; margin-bottom: 20px; }
+        .hero h1 span { color: var(--accent); font-style: italic; }
+        body[dir="rtl"] .hero h1 span { font-style: normal; }
+        
+        .hero p { font-size: clamp(1rem, 3vw, 1.2rem); color: var(--text-muted); max-width: 600px; margin: 0 auto 40px; font-weight: 300; }
 
         .hero-btns { display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; width: 100%; }
 
         .btn {
-            padding: 15px 30px; border-radius: 8px; font-weight: 700; font-size: 1rem;
+            padding: 15px 30px; border-radius: 8px; font-weight: 600; font-size: 1rem;
             text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
             cursor: pointer; border: none; transition: all 0.3s ease; width: 100%; justify-content: center;
+            font-family: 'Outfit', sans-serif; letter-spacing: 0.5px;
         }
+        body[dir="rtl"] .btn { font-family: 'Tajawal', sans-serif; }
         @media (min-width: 600px) { .btn { width: auto; } }
         
         .btn-primary { background: var(--text-main); color: var(--bg-main); }
@@ -157,8 +174,9 @@
 
         section { padding: 80px 5%; }
         .section-header { text-align: center; margin-bottom: 50px; }
-        .section-header h2 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 10px; }
-        .section-header p { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.85rem; }
+        .section-header h2 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 10px; }
+        .section-header p { color: var(--accent); text-transform: uppercase; letter-spacing: 3px; font-weight: 600; font-size: 0.8rem; font-family: 'Outfit', sans-serif; }
+        body[dir="rtl"] .section-header p { font-family: 'Tajawal', sans-serif; letter-spacing: 1px; }
 
         .bento-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
         @media (min-width: 768px) { .bento-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -173,13 +191,14 @@
         .bento-card:hover { background: var(--bg-card-hover); border-color: var(--accent); transform: translateY(-5px); }
         .bento-card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; }
         .bento-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
-        .bento-card p { color: var(--text-muted); font-size: 0.95rem; }
+        .bento-card p { color: var(--text-muted); font-size: 0.95rem; font-weight: 300; }
 
         .portfolio-filters { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
         .filter-btn {
             background: transparent; border: 1px solid var(--border); color: var(--text-main);
-            padding: 8px 20px; border-radius: 30px; cursor: pointer; font-weight: 600; font-size: 0.9rem;
+            padding: 8px 20px; border-radius: 30px; cursor: pointer; font-weight: 600; font-size: 0.9rem; font-family: 'Outfit', sans-serif;
         }
+        body[dir="rtl"] .filter-btn { font-family: 'Tajawal', sans-serif; }
         .filter-btn.active, .filter-btn:hover { background: var(--accent); color: #111; border-color: var(--accent); }
 
         .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
@@ -194,8 +213,9 @@
         .portfolio-item .label {
             position: absolute; bottom: 15px; left: 15px;
             background: rgba(0,0,0,0.8); color: #fff; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px); font-family: 'Outfit', sans-serif;
         }
+        body[dir="rtl"] .portfolio-item .label { left: auto; right: 15px; font-family: 'Tajawal', sans-serif; }
 
         .process-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
         @media (min-width: 768px) { .process-grid { grid-template-columns: repeat(4, 1fr); } }
@@ -206,8 +226,8 @@
             border-radius: 50%; display: flex; justify-content: center; align-items: center;
             font-size: 2rem; color: var(--accent); margin: 0 auto 20px;
         }
-        .process-step h3 { font-size: 1.2rem; margin-bottom: 10px; }
-        .process-step p { font-size: 0.9rem; color: var(--text-muted); }
+        .process-step h3 { font-size: 1.3rem; margin-bottom: 10px; }
+        .process-step p { font-size: 0.9rem; color: var(--text-muted); font-weight: 300; }
 
         .quote-container {
             max-width: 700px; margin: 0 auto; background: var(--bg-card);
@@ -215,7 +235,8 @@
         }
         .form-group { margin-bottom: 20px; text-align: left; }
         body[dir="rtl"] .form-group { text-align: right; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem; font-family: 'Outfit', sans-serif; }
+        body[dir="rtl"] .form-group label { font-family: 'Tajawal', sans-serif; }
         .form-control {
             width: 100%; padding: 15px; background: var(--bg-main); border: 1px solid var(--border);
             border-radius: 8px; color: var(--text-main); font-family: inherit; font-size: 1rem;
@@ -229,13 +250,15 @@
         }
         details:hover { border-color: var(--accent); }
         summary {
-            padding: 20px; cursor: pointer; font-weight: 700; font-size: 1.1rem;
+            padding: 20px; cursor: pointer; font-weight: 600; font-size: 1.1rem;
             list-style: none; display: flex; justify-content: space-between; align-items: center;
+            font-family: 'Outfit', sans-serif;
         }
+        body[dir="rtl"] summary { font-family: 'Tajawal', sans-serif; }
         summary::-webkit-details-marker { display: none; }
         summary::after { content: '+'; font-size: 1.5rem; color: var(--accent); transition: 0.3s; }
         details[open] summary::after { content: '-'; transform: rotate(180deg); }
-        details p { padding: 0 20px 20px; color: var(--text-muted); }
+        details p { padding: 0 20px 20px; color: var(--text-muted); font-weight: 300; }
 
         .map-wrapper { height: 300px; width: 100%; border-top: 1px solid var(--border); position: relative; display: block; }
         .map-wrapper iframe { width: 100%; height: 100%; border: none; filter: var(--map-filter); pointer-events: none; }
@@ -245,9 +268,11 @@
         }
         .map-btn {
             background: var(--text-main); color: var(--bg-main); padding: 12px 25px;
-            border-radius: 30px; font-weight: 700; display: flex; align-items: center; gap: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3); animation: pulse 2s infinite;
+            border-radius: 30px; font-weight: 600; display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); animation: pulse 2s infinite; font-family: 'Outfit', sans-serif;
         }
+        body[dir="rtl"] .map-btn { font-family: 'Tajawal', sans-serif; }
+        
         footer { background: #000; text-align: center; padding: 30px 20px; color: #666; font-size: 0.9rem; }
 
         /* Mobile Bottom Navigation */
@@ -263,8 +288,9 @@
         
         .bottom-nav-item {
             color: var(--text-muted); text-decoration: none; display: flex;
-            flex-direction: column; align-items: center; gap: 5px; font-size: 0.7rem; font-weight: 600;
+            flex-direction: column; align-items: center; gap: 5px; font-size: 0.7rem; font-weight: 600; font-family: 'Outfit', sans-serif;
         }
+        body[dir="rtl"] .bottom-nav-item { font-family: 'Tajawal', sans-serif; }
         .bottom-nav-item i { font-size: 1.4rem; }
         .bottom-nav-item:hover, .bottom-nav-item.active { color: var(--accent); }
         
@@ -277,7 +303,7 @@
             body { padding-bottom: 70px; }
         }
 
-        /* Desktop Floating Action Buttons (WhatsApp & Call) */
+        /* Desktop Floating Action Buttons */
         .desktop-fab-container {
             display: none; position: fixed; bottom: 30px; right: 30px;
             flex-direction: column; gap: 15px; z-index: 999;
