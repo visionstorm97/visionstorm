@@ -1,63 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vision Storm | Premium Printing & Finishing</title>
-    <!-- Elegant Fonts: Playfair Display (Editorial) & Space Grotesk (Modern) -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+    <title>Vision Storm | Premium Printing</title>
+    <!-- Elegant Fonts: Playfair Display (EN), Space Grotesk (EN), Cairo (AR) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            /* Premium Paper & Ink Palette */
-            --paper-bg: #F9F8F6;
-            --paper-texture: #F0EFEA;
-            --ink-black: #121212;
-            --ink-grey: #4A4A4A;
+            /* Light Theme Palette */
+            --bg-color: #F9F8F6;
+            --text-color: #121212;
+            --text-muted: #4A4A4A;
+            --card-bg: #FFFFFF;
+            --border-color: rgba(18, 18, 18, 0.1);
             --accent-gold: #C5A059;
             --whatsapp-green: #25D366;
+            --header-bg: rgba(249, 248, 246, 0.9);
+            --map-filter: grayscale(100%) contrast(1.2) opacity(0.8);
+        }
+
+        /* Dark Theme Overrides */
+        body.dark-mode {
+            --bg-color: #0d0d0d;
+            --text-color: #F9F8F6;
+            --text-muted: #A0A0A0;
+            --card-bg: #161616;
+            --border-color: rgba(249, 248, 246, 0.1);
+            --header-bg: rgba(13, 13, 13, 0.9);
+            --map-filter: invert(90%) hue-rotate(180deg) contrast(1.2);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         body {
-            background-color: var(--paper-bg);
-            color: var(--ink-black);
+            background-color: var(--bg-color);
+            color: var(--text-color);
             font-family: 'Space Grotesk', sans-serif;
             overflow-x: hidden;
             line-height: 1.6;
-            /* Subtle paper grain texture */
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+        }
+
+        /* Arabic Font Setup */
+        body[dir="rtl"] {
+            font-family: 'Cairo', sans-serif;
         }
 
         /* Typography */
         h1, h2, h3, .brand-font {
             font-family: 'Playfair Display', serif;
         }
+        
+        body[dir="rtl"] h1, body[dir="rtl"] h2, body[dir="rtl"] h3 {
+            font-family: 'Cairo', sans-serif;
+        }
 
-        /* Navigation (Centered Logo Only) */
+        /* Navigation */
         header {
             display: flex;
-            justify-content: center; /* Centered since nav links are gone */
+            justify-content: space-between;
             align-items: center;
-            padding: 20px 6%;
+            padding: 15px 6%;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 100;
-            background: rgba(249, 248, 246, 0.9);
+            background: var(--header-bg);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(18, 18, 18, 0.1);
-            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .header-logo {
-            height: 45px;
+            height: 40px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            z-index: 2;
+        }
+
+        /* Toggle Buttons */
+        .toggle-btn {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px 15px;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        body[dir="rtl"] .toggle-btn {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .toggle-btn:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
         }
 
         /* Hero Section */
@@ -74,22 +131,26 @@
             font-size: 5rem;
             line-height: 1.1;
             margin-bottom: 20px;
-            color: var(--ink-black);
+            color: var(--text-color);
         }
 
         .hero-text h1 span {
             color: var(--accent-gold);
             font-style: italic;
         }
+        
+        body[dir="rtl"] .hero-text h1 span {
+            font-style: normal;
+        }
 
         .hero-text p {
             font-size: 1.2rem;
-            color: var(--ink-grey);
+            color: var(--text-muted);
             margin-bottom: 40px;
             max-width: 500px;
         }
 
-        /* Hero Logo Stack Effect */
+        /* Hero Logo Stack */
         .hero-visual {
             display: flex;
             justify-content: center;
@@ -100,14 +161,14 @@
         .paper-stack {
             position: relative;
             padding: 40px;
-            background: #fff;
+            background: var(--card-bg);
             box-shadow: 
-                0 10px 30px rgba(0,0,0,0.05),
-                15px 15px 0 -5px #fff,
-                15px 15px 0 -4px rgba(0,0,0,0.1),
-                30px 30px 0 -10px #fff,
-                30px 30px 0 -9px rgba(0,0,0,0.1);
-            border: 1px solid rgba(0,0,0,0.05);
+                0 10px 30px rgba(0,0,0,0.1),
+                15px 15px 0 -5px var(--card-bg),
+                15px 15px 0 -4px var(--border-color),
+                30px 30px 0 -10px var(--card-bg),
+                30px 30px 0 -9px var(--border-color);
+            border: 1px solid var(--border-color);
             transition: transform 0.5s ease;
         }
 
@@ -117,7 +178,7 @@
 
         .paper-stack img {
             width: 100%;
-            max-width: 350px;
+            max-width: 300px;
             display: block;
         }
 
@@ -139,24 +200,25 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
+            border-radius: 2px;
         }
 
         .btn-primary {
-            background-color: var(--ink-black);
-            color: var(--paper-bg);
-            border: 1px solid var(--ink-black);
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            border: 1px solid var(--text-color);
         }
 
         .btn-primary:hover {
             background-color: var(--accent-gold);
             border-color: var(--accent-gold);
-            color: var(--ink-black);
+            color: #121212;
         }
 
         .btn-whatsapp {
             background-color: transparent;
-            color: var(--ink-black);
-            border: 1px solid var(--ink-black);
+            color: var(--text-color);
+            border: 1px solid var(--text-color);
         }
 
         .btn-whatsapp:hover {
@@ -168,7 +230,7 @@
         /* Exclusive Print Section */
         .exclusive {
             padding: 100px 6%;
-            background-color: #fff;
+            background-color: var(--card-bg);
         }
 
         .section-title {
@@ -195,11 +257,10 @@
             gap: 40px;
         }
 
-        /* Paper Swatch Cards */
         .swatch-card {
-            background: var(--paper-bg);
+            background: var(--bg-color);
             padding: 40px;
-            border: 1px solid rgba(18, 18, 18, 0.1);
+            border: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
             transition: all 0.4s ease;
@@ -212,13 +273,18 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: var(--ink-black);
+            background: var(--text-color);
             transition: all 0.4s ease;
+        }
+
+        body[dir="rtl"] .swatch-card::before {
+            left: auto;
+            right: 0;
         }
 
         .swatch-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
         .swatch-card:hover::before {
@@ -237,15 +303,15 @@
         }
 
         .swatch-card p {
-            color: var(--ink-grey);
+            color: var(--text-muted);
             font-size: 0.95rem;
         }
 
         /* Contact Banner */
         .contact-banner {
             padding: 80px 6%;
-            background-color: var(--ink-black);
-            color: var(--paper-bg);
+            background-color: #121212; /* Always dark for contrast */
+            color: #F9F8F6;
             text-align: center;
         }
 
@@ -281,7 +347,7 @@
         }
 
         .contact-item a {
-            color: var(--paper-bg);
+            color: #F9F8F6;
             text-decoration: none;
             font-weight: 600;
             transition: color 0.3s;
@@ -291,51 +357,74 @@
             color: var(--accent-gold);
         }
 
-        .contact-banner .btn-primary {
-            background-color: var(--paper-bg);
-            color: var(--ink-black);
-            border-color: var(--paper-bg);
-        }
-
-        .contact-banner .btn-primary:hover {
-            background-color: var(--accent-gold);
-            border-color: var(--accent-gold);
-        }
-
         /* Footer & Map */
         footer {
             background: #000;
+            position: relative;
         }
 
         .map-container {
             width: 100%;
-            height: 350px;
+            height: 400px;
             position: relative;
-            /* Filter to make the map match the premium aesthetic */
-            filter: grayscale(100%) contrast(1.2) opacity(0.8);
-            transition: filter 0.5s ease;
-        }
-
-        .map-container:hover {
-            filter: grayscale(0%) contrast(1) opacity(1);
+            display: block;
+            text-decoration: none;
         }
 
         .map-container iframe {
             width: 100%;
             height: 100%;
             border: none;
+            filter: var(--map-filter);
+            transition: filter 0.5s ease;
+            pointer-events: none; /* Prevents iframe from capturing clicks so the <a> tag gets it */
+        }
+
+        .map-container:hover iframe {
+            filter: grayscale(0%) contrast(1) opacity(1);
+        }
+
+        /* Clickable Map Overlay */
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,0.3);
+            transition: background 0.3s ease;
+        }
+
+        .map-overlay:hover {
+            background: rgba(0,0,0,0.1);
+        }
+
+        .map-btn {
+            background: var(--bg-color);
+            color: var(--text-color);
+            padding: 15px 30px;
+            font-weight: 700;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            pointer-events: none; /* Let clicks pass to the <a> tag */
         }
 
         .footer-bottom {
             text-align: center;
-            padding: 30px;
+            padding: 20px;
             background: #000;
             color: #666;
             font-size: 0.9rem;
             border-top: 1px solid #111;
         }
 
-        /* Floating Action Buttons (FAB) for Mobile & Desktop */
+        /* Floating Action Buttons */
         .fab-container {
             position: fixed;
             bottom: 30px;
@@ -344,6 +433,11 @@
             flex-direction: column;
             gap: 15px;
             z-index: 999;
+        }
+
+        body[dir="rtl"] .fab-container {
+            right: auto;
+            left: 30px;
         }
 
         .fab {
@@ -364,14 +458,8 @@
             transform: scale(1.1) translateY(-5px);
         }
 
-        .fab-wa {
-            background-color: var(--whatsapp-green);
-        }
-
-        .fab-call {
-            background-color: var(--accent-gold);
-            color: var(--ink-black);
-        }
+        .fab-wa { background-color: var(--whatsapp-green); }
+        .fab-call { background-color: var(--accent-gold); color: #121212; }
 
         /* Mobile Responsiveness */
         @media (max-width: 900px) {
@@ -384,6 +472,8 @@
             .hero-text p { margin: 0 auto 30px; }
             .btn-group { justify-content: center; }
             .paper-stack { margin-top: 40px; }
+            
+            body[dir="rtl"] .hero-text p { margin: 0 auto 30px; }
         }
 
         @media (max-width: 600px) {
@@ -391,7 +481,9 @@
             .section-title h2 { font-size: 2.2rem; }
             .contact-info { flex-direction: column; gap: 20px; }
             .fab { width: 50px; height: 50px; font-size: 1.2rem; }
-            .map-container { height: 250px; }
+            .map-container { height: 300px; }
+            .controls { gap: 10px; }
+            .toggle-btn { padding: 5px 10px; font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -399,20 +491,34 @@
 
     <!-- Header -->
     <header>
+        <div class="controls">
+            <!-- Theme Toggle -->
+            <button class="toggle-btn" id="theme-toggle" aria-label="Toggle Theme">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+
         <img src="logo.png" alt="Vision Storm Logo" class="header-logo">
+
+        <div class="controls">
+            <!-- Language Toggle -->
+            <button class="toggle-btn" id="lang-toggle">
+                عربي
+            </button>
+        </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-text">
-            <h1>Vision <span>Storm</span></h1>
-            <p>An exclusive printing house dedicated to transforming your vision into tangible, premium quality prints.</p>
+            <h1><span data-i18n="hero_title_1">Vision</span> <span data-i18n="hero_title_2" style="color: var(--accent-gold);">Storm</span></h1>
+            <p data-i18n="hero_desc">An exclusive printing house dedicated to transforming your vision into tangible, premium quality prints.</p>
             <div class="btn-group">
                 <a href="https://wa.me/966536801025" target="_blank" class="btn btn-whatsapp">
-                    <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                    <i class="fa-brands fa-whatsapp"></i> <span data-i18n="btn_whatsapp">Chat on WhatsApp</span>
                 </a>
                 <a href="tel:+966536801025" class="btn btn-primary">
-                    <i class="fa-solid fa-phone"></i> Call Us
+                    <i class="fa-solid fa-phone"></i> <span data-i18n="btn_call">Call Us</span>
                 </a>
             </div>
         </div>
@@ -426,43 +532,41 @@
     <!-- Exclusive Printing Section -->
     <section class="exclusive" id="exclusive">
         <div class="section-title">
-            <p>Elevate Your Brand</p>
-            <h2>Exclusive Print Finishes</h2>
+            <p data-i18n="exclusive_subtitle">Elevate Your Brand</p>
+            <h2 data-i18n="exclusive_title">Exclusive Print Finishes</h2>
         </div>
         <div class="grid">
             <div class="swatch-card">
                 <i class="fa-solid fa-gem"></i>
-                <h3>Foil Stamping</h3>
-                <p>Add a touch of luxury with metallic gold, silver, or holographic foils that catch the light and demand attention.</p>
+                <h3 data-i18n="finish_1_title">Foil Stamping</h3>
+                <p data-i18n="finish_1_desc">Add a touch of luxury with metallic gold, silver, or holographic foils that catch the light and demand attention.</p>
             </div>
             <div class="swatch-card">
                 <i class="fa-solid fa-eye"></i>
-                <h3>Spot UV Coating</h3>
-                <p>A brilliant, raised gloss effect applied to specific areas of your design, creating a stunning contrast against matte textures.</p>
+                <h3 data-i18n="finish_2_title">Spot UV Coating</h3>
+                <p data-i18n="finish_2_desc">A brilliant, raised gloss effect applied to specific areas of your design, creating a stunning contrast against matte textures.</p>
             </div>
             <div class="swatch-card">
                 <i class="fa-solid fa-layer-group"></i>
-                <h3>Blind Embossing</h3>
-                <p>A tactile, raised design pressed directly into the paper without ink. It speaks luxury before a single word is read.</p>
+                <h3 data-i18n="finish_3_title">Blind Embossing</h3>
+                <p data-i18n="finish_3_desc">A tactile, raised design pressed directly into the paper without ink. It speaks luxury before a single word is read.</p>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section class="contact-banner" id="contact">
-        <h2>Let's Print Something <span>Extraordinary</span></h2>
-        <p>Reach out to our exclusive print consultants today.</p>
+        <h2><span data-i18n="contact_title_1">Let's Print Something</span> <span style="color: var(--accent-gold);" data-i18n="contact_title_2">Extraordinary</span></h2>
+        <p data-i18n="contact_desc">Reach out to our exclusive print consultants today.</p>
         
         <div class="contact-info">
-            <!-- Phone Link -->
             <div class="contact-item">
                 <i class="fa-solid fa-phone"></i>
                 <a href="tel:+966536801025">+966 53 680 1025</a>
             </div>
-            <!-- WhatsApp Link -->
             <div class="contact-item">
                 <i class="fa-brands fa-whatsapp"></i>
-                <a href="https://wa.me/966536801025" target="_blank">WhatsApp Us</a>
+                <a href="https://wa.me/966536801025" target="_blank" data-i18n="btn_whatsapp">WhatsApp Us</a>
             </div>
         </div>
 
@@ -476,21 +580,28 @@
 
     <!-- Footer with Google Maps -->
     <footer>
-        <div class="map-container">
-            <!-- Note: For the exact pin, replace the src with the embed link from your Google Maps listing -->
+        <!-- Map wrapped in an anchor tag. Clicking anywhere opens Google Maps Directions -->
+        <a href="https://maps.app.goo.gl/tmQWSedrD4iPHsut5?g_st=awb" target="_blank" class="map-container">
             <iframe 
                 src="https://maps.google.com/maps?q=Vision%20Storm%20Saudi%20Arabia&t=&z=13&ie=UTF8&iwloc=&output=embed" 
                 allowfullscreen="" 
                 loading="lazy" 
                 referrerpolicy="no-referrer-when-downgrade">
             </iframe>
-        </div>
+            <div class="map-overlay">
+                <div class="map-btn">
+                    <i class="fa-solid fa-diamond-turn-right"></i>
+                    <span data-i18n="btn_directions">Get Directions</span>
+                </div>
+            </div>
+        </a>
+        
         <div class="footer-bottom">
-            <p>&copy; 2024 Vision Storm. Premium Printing Company. | visionstorm.sa</p>
+            <p>&copy; 2026 Vision Storm. Premium Printing Company. | visionstorm.sa</p>
         </div>
     </footer>
 
-    <!-- Floating Action Buttons (WhatsApp & Call) -->
+    <!-- Floating Action Buttons -->
     <div class="fab-container">
         <a href="https://wa.me/966536801025" target="_blank" class="fab fab-wa" aria-label="WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
@@ -500,22 +611,105 @@
         </a>
     </div>
 
-    <!-- Smooth Scrolling Script -->
+    <!-- JavaScript for Theme, Language, and Map -->
     <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+        // --- 1. THEME TOGGLE LOGIC ---
+        const themeBtn = document.getElementById('theme-toggle');
+        const themeIcon = themeBtn.querySelector('i');
+        const body = document.body;
+
+        // Check for saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark-mode');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        themeBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+
+        // --- 2. LANGUAGE TOGGLE LOGIC ---
+        const langBtn = document.getElementById('lang-toggle');
+        let currentLang = 'en';
+
+        const translations = {
+            en: {
+                hero_title_1: "Vision",
+                hero_title_2: "Storm",
+                hero_desc: "An exclusive printing house dedicated to transforming your vision into tangible, premium quality prints.",
+                btn_whatsapp: "Chat on WhatsApp",
+                btn_call: "Call Us",
+                exclusive_subtitle: "Elevate Your Brand",
+                exclusive_title: "Exclusive Print Finishes",
+                finish_1_title: "Foil Stamping",
+                finish_1_desc: "Add a touch of luxury with metallic gold, silver, or holographic foils that catch the light and demand attention.",
+                finish_2_title: "Spot UV Coating",
+                finish_2_desc: "A brilliant, raised gloss effect applied to specific areas of your design, creating a stunning contrast against matte textures.",
+                finish_3_title: "Blind Embossing",
+                finish_3_desc: "A tactile, raised design pressed directly into the paper without ink. It speaks luxury before a single word is read.",
+                contact_title_1: "Let's Print Something",
+                contact_title_2: "Extraordinary",
+                contact_desc: "Reach out to our exclusive print consultants today.",
+                btn_directions: "Get Directions",
+                lang_btn: "عربي"
+            },
+            ar: {
+                hero_title_1: "فيجن",
+                hero_title_2: "ستورم",
+                hero_desc: "مطبعة حصرية مكرسة لتحويل رؤيتك إلى مطبوعات ملموسة وعالية الجودة.",
+                btn_whatsapp: "تواصل واتساب",
+                btn_call: "اتصل بنا",
+                exclusive_subtitle: "ارتقِ بعلامتك التجارية",
+                exclusive_title: "لمسات طباعة حصرية",
+                finish_1_title: "الطباعة بالرقائق المعدنية",
+                finish_1_desc: "أضف لمسة من الفخامة باستخدام رقائق الذهب أو الفضة أو الهولوغرام التي تلتقط الضوء وتجذب الانتباه.",
+                finish_2_title: "طلاء UV الموضعي",
+                finish_2_desc: "تأثير لامع بارز يتم تطبيقه على مناطق محددة من تصميمك، مما يخلق تباينًا مذهلاً.",
+                finish_3_title: "النقش الغائر (Embossing)",
+                finish_3_desc: "تصميم بارز وملموس يتم ضغطه مباشرة في الورق بدون حبر. ينطق بالفخامة قبل قراءة كلمة واحدة.",
+                contact_title_1: "لنطبع شيئاً",
+                contact_title_2: "استثنائياً",
+                contact_desc: "تواصل مع مستشاري الطباعة الحصريين لدينا اليوم.",
+                btn_directions: "احصل على الاتجاهات",
+                lang_btn: "EN"
+            }
+        };
+
+        langBtn.addEventListener('click', () => {
+            if (currentLang === 'en') {
+                currentLang = 'ar';
+                document.documentElement.setAttribute('dir', 'rtl');
+                document.documentElement.setAttribute('lang', 'ar');
+            } else {
+                currentLang = 'en';
+                document.documentElement.setAttribute('dir', 'ltr');
+                document.documentElement.setAttribute('lang', 'en');
+            }
+
+            // Update all text with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    element.textContent = translations[currentLang][key];
+                }
             });
+
+            // Update button text
+            langBtn.textContent = translations[currentLang].lang_btn;
         });
         
-        // Header scroll effect
+        // --- 3. HEADER SCROLL EFFECT ---
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > 50) {
-                header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.05)';
+                header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
             } else {
                 header.style.boxShadow = 'none';
             }
