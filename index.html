@@ -301,20 +301,32 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
 
+        /* التعديل المهم للصور */
         .product-img-wrapper {
-            width: 100%; height: 250px; overflow: hidden; position: relative;
-            background: #000;
+            width: 100%; 
+            height: 280px; /* ارتفاع ثابت */
+            overflow: hidden; 
+            position: relative;
+            background: rgba(0,0,0,0.2); /* خلفية خفيفة إذا كانت الصورة شفافة */
+            padding: 20px; /* مسافة كرمال الصورة ما تلزق */
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
         }
         
         .product-img-wrapper img {
-            width: 100%; height: 100%; object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s;
-            opacity: 0.8;
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; /* تظهر الصورة كاملة بدون قص */
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s;
+            opacity: 0.9;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3)); /* ظل للصور الـ PNG */
         }
 
         .product-card:hover .product-img-wrapper img {
-            transform: scale(1.1);
+            transform: scale(1.08);
             opacity: 1;
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5));
         }
 
         .product-info {
@@ -345,7 +357,7 @@
             padding: 15px;
             border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem; /* Icon size */
+            font-size: 1.5rem;
             transition: all 0.3s ease;
             text-decoration: none;
             margin-top: auto;
@@ -462,6 +474,7 @@
         }
         @media (max-width: 767px) {
             body { padding-bottom: 70px; }
+            .product-img-wrapper { height: 240px; padding: 15px; } /* تصغير الارتفاع شوي عالموبايل */
         }
 
         /* --- DESKTOP FLOATING FABS --- */
@@ -573,7 +586,6 @@
             <!-- Product 1: Tote Bags -->
             <div class="product-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="product-img-wrapper">
-                    <!-- الصورة من مجلد Product-Images -->
                     <img src="Product-Images/tote-bags.jpg" alt="Tote Bags">
                 </div>
                 <div class="product-info">
@@ -589,7 +601,6 @@
             <!-- Product 2: T-Shirts -->
             <div class="product-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="product-img-wrapper">
-                    <!-- الصورة من مجلد Product-Images -->
                     <img src="Product-Images/t-shirts.jpg" alt="T-Shirts">
                 </div>
                 <div class="product-info">
@@ -605,8 +616,7 @@
             <!-- Product 3: Safety Vests -->
             <div class="product-card" data-aos="fade-up" data-aos-delay="300">
                 <div class="product-img-wrapper">
-                    <!-- الصورة من مجلد Product-Images -->
-                    <img src="Product-Images/safety-vests.jpg" alt="Safety Vests">
+                    <img src="Product-Images/safety-vests.png" alt="Safety Vests">
                 </div>
                 <div class="product-info">
                     <span class="product-category" data-i18n="cat_apparel">Apparel & Bags</span>
@@ -621,7 +631,6 @@
             <!-- Product 4: Roll-up & Banners -->
             <div class="product-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="product-img-wrapper">
-                    <!-- الصورة من مجلد Product-Images -->
                     <img src="Product-Images/banners.jpg" alt="Banners">
                 </div>
                 <div class="product-info">
@@ -637,7 +646,6 @@
             <!-- Product 5: Canvas Prints -->
             <div class="product-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="product-img-wrapper">
-                    <!-- الصورة من مجلد Product-Images -->
                     <img src="Product-Images/canvas.jpg" alt="Canvas">
                 </div>
                 <div class="product-info">
@@ -653,7 +661,6 @@
             <!-- Product 6: Brochures & Menus -->
             <div class="product-card" data-aos="fade-up" data-aos-delay="300">
                 <div class="product-img-wrapper">
-                    <!-- الصورة من مجلد Product-Images -->
                     <img src="Product-Images/brochures.jpg" alt="Brochures">
                 </div>
                 <div class="product-info">
@@ -669,7 +676,6 @@
             <!-- Product 7: Die-Cut Stickers -->
             <div class="product-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="product-img-wrapper">
-                    <!-- الصورة من مجلد Product-Images -->
                     <img src="Product-Images/stickers.jpg" alt="Stickers">
                 </div>
                 <div class="product-info">
@@ -685,7 +691,6 @@
             <!-- Product 8: 3D Letters -->
             <div class="product-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="product-img-wrapper">
-                    <!-- الصورة من مجلد Product-Images -->
                     <img src="Product-Images/3d-letters.jpg" alt="3D Letters">
                 </div>
                 <div class="product-info">
