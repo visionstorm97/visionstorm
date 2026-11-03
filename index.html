@@ -91,7 +91,8 @@
         .process-step h3,
         .map-btn,
         .bottom-nav-item span,
-        .marquee-text {
+        .marquee-text,
+        .product-title {
             font-family: 'New Rocker', cursive;
             font-weight: normal;
             letter-spacing: 0.5px;
@@ -105,7 +106,8 @@
         body[dir="rtl"] .process-step h3,
         body[dir="rtl"] .map-btn,
         body[dir="rtl"] .bottom-nav-item span,
-        body[dir="rtl"] .marquee-text {
+        body[dir="rtl"] .marquee-text,
+        body[dir="rtl"] .product-title {
             font-family: 'Tajawal', sans-serif;
             font-weight: 700;
         }
@@ -185,7 +187,6 @@
             overflow: hidden;
         }
 
-        /* Animated Background Blob */
         .hero::before {
             content: ''; position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
             width: 60vw; height: 60vw; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
@@ -207,7 +208,6 @@
         .hero h1 { font-size: clamp(3.5rem, 10vw, 7rem); line-height: 1.1; margin-bottom: 20px; position: relative; }
         .hero h1 span { color: var(--accent); position: relative; }
         
-        /* Glitch Effect */
         .glitch { position: relative; }
         .glitch::before, .glitch::after {
             content: attr(data-text);
@@ -230,7 +230,6 @@
         }
         @media (min-width: 600px) { .btn { width: auto; } }
         
-        /* Button Shine Effect */
         .btn::before {
             content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
             background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
@@ -244,7 +243,7 @@
         .btn-wa { background: var(--whatsapp); color: #fff; }
         .btn-wa:hover { background: #1eb955; transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); }
 
-        /* --- MARQUEE (Infinite Scroll) --- */
+        /* --- MARQUEE --- */
         .marquee-container {
             width: 100%; overflow: hidden; background: var(--accent); color: #111;
             padding: 15px 0; display: flex; white-space: nowrap; border-top: 2px solid #111; border-bottom: 2px solid #111;
@@ -284,35 +283,81 @@
         .bento-card p { color: var(--text-muted); font-size: 0.95rem; font-family: 'Outfit', sans-serif; font-weight: 300; transition: transform 0.3s; }
         .bento-card:hover p { transform: translateZ(10px); }
 
-        /* --- PORTFOLIO --- */
-        .portfolio-filters { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
-        .filter-btn {
-            background: transparent; border: 1px solid var(--border); color: var(--text-main);
-            padding: 8px 20px; border-radius: 30px; cursor: pointer; font-size: 1.1rem;
-            transition: all 0.3s;
-        }
-        .filter-btn.active, .filter-btn:hover { background: var(--accent); color: #111; border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 5px 15px var(--accent-glow); }
+        /* --- PRODUCTS SECTION --- */
+        .products-grid { display: grid; grid-template-columns: 1fr; gap: 30px; }
+        @media (min-width: 768px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
 
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .portfolio-item {
-            background: var(--bg-card); border-radius: 16px; height: 250px;
-            display: flex; justify-content: center; align-items: center;
-            border: 1px solid var(--border);
-            position: relative; overflow: hidden; transition: 0.4s;
-            cursor: pointer;
+        .product-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 16px; overflow: hidden; position: relative;
+            transition: all 0.4s ease;
+            display: flex; flex-direction: column;
         }
-        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: 0.5s ease; }
-        .portfolio-item:hover img { opacity: 1; transform: scale(1.1) rotate(2deg); }
-        .portfolio-item .label {
-            position: absolute; bottom: -50px; left: 15px;
-            background: rgba(0,0,0,0.8); color: #fff; padding: 8px 15px; border-radius: 20px; font-size: 0.9rem;
-            backdrop-filter: blur(5px); font-family: 'Outfit', sans-serif;
-            transition: bottom 0.3s ease;
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
-        .portfolio-item:hover .label { bottom: 15px; }
-        body[dir="rtl"] .portfolio-item .label { left: auto; right: 15px; font-family: 'Tajawal', sans-serif; }
 
-        /* --- PROCESS (Animated Lines) --- */
+        .product-img-wrapper {
+            width: 100%; height: 250px; overflow: hidden; position: relative;
+            background: #000;
+        }
+        
+        .product-img-wrapper img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s;
+            opacity: 0.8;
+        }
+
+        .product-card:hover .product-img-wrapper img {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        .product-info {
+            padding: 25px;
+            display: flex; flex-direction: column; flex-grow: 1;
+            background: var(--bg-main);
+        }
+
+        .product-category {
+            font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px;
+            font-family: 'Outfit', sans-serif; font-weight: 600;
+        }
+
+        .product-title {
+            font-size: 1.6rem; margin-bottom: 15px; color: var(--text-main);
+        }
+
+        .product-desc {
+            color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* WHATSAPP PRODUCT BUTTON */
+        .product-btn {
+            background: var(--whatsapp); 
+            color: #fff; 
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; /* Icon size */
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: auto;
+        }
+
+        .product-btn:hover { 
+            background: #1eb955; 
+            transform: scale(1.02); 
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        /* --- PROCESS --- */
         .process-grid { display: grid; grid-template-columns: 1fr; gap: 20px; position: relative; }
         @media (min-width: 768px) { .process-grid { grid-template-columns: repeat(4, 1fr); } }
         
@@ -444,7 +489,6 @@
 </head>
 <body>
 
-    <!-- Custom Cursor -->
     <div class="cursor" id="cursor"></div>
 
     <header>
@@ -455,7 +499,7 @@
         <nav class="desktop-nav">
             <a href="#home" data-i18n="nav_home">Home</a>
             <a href="#services" data-i18n="nav_services">Services</a>
-            <a href="#portfolio" data-i18n="nav_portfolio">Portfolio</a>
+            <a href="#products" data-i18n="nav_products">Products</a>
             <a href="#quote" data-i18n="nav_quote">Quote</a>
         </nav>
 
@@ -478,7 +522,6 @@
         </div>
     </section>
 
-    <!-- Infinite Marquee -->
     <div class="marquee-container">
         <div class="marquee-content">
             <div class="marquee-text"><i class="fa-solid fa-star"></i> PREMIUM PRINTING</div>
@@ -519,36 +562,142 @@
         </div>
     </section>
 
-    <section id="portfolio" style="background: var(--bg-card);">
+    <section id="products" style="background: var(--bg-card);">
         <div class="section-header" data-aos="fade-up">
-            <p data-i18n="port_sub">Our Work</p>
-            <h2 data-i18n="port_title">Recent Projects</h2>
+            <p data-i18n="prod_sub">What We Print</p>
+            <h2 data-i18n="prod_title">Our Products</h2>
         </div>
         
-        <div class="portfolio-filters" data-aos="fade-up" data-aos-delay="200">
-            <button class="filter-btn active" data-filter="all" data-i18n="f_all">All</button>
-            <button class="filter-btn" data-filter="cards" data-i18n="f_cards">Business Cards</button>
-            <button class="filter-btn" data-filter="packaging" data-i18n="f_pack">Packaging</button>
-            <button class="filter-btn" data-filter="banners" data-i18n="f_banners">Banners</button>
-        </div>
+        <div class="products-grid">
+            
+            <!-- Product 1: Tote Bags -->
+            <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-img-wrapper">
+                    <!-- الصورة من مجلد Product-Images -->
+                    <img src="Product-Images/tote-bags.jpg" alt="Tote Bags">
+                </div>
+                <div class="product-info">
+                    <span class="product-category" data-i18n="cat_apparel">Apparel & Bags</span>
+                    <h3 class="product-title" data-i18n="p1_t">Tote Bags</h3>
+                    <p class="product-desc" data-i18n="p1_d">High-quality canvas tote bags with custom printed artwork, perfect for retail and events.</p>
+                    <a href="https://wa.me/966536801025?text=السلام%20عليكم%20ممكن%20تفاصيل%20اكثر%20عن%20Tote%20Bags" target="_blank" class="product-btn" title="Order Tote Bags on WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
 
-        <div class="portfolio-grid" id="portfolio-grid">
-            <div class="portfolio-item" data-category="cards" data-aos="zoom-in" data-aos-delay="100">
-                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=600&auto=format&fit=crop" alt="Foil Card">
-                <div class="label">Gold Foil Card</div>
+            <!-- Product 2: T-Shirts -->
+            <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="product-img-wrapper">
+                    <!-- الصورة من مجلد Product-Images -->
+                    <img src="Product-Images/t-shirts.jpg" alt="T-Shirts">
+                </div>
+                <div class="product-info">
+                    <span class="product-category" data-i18n="cat_apparel">Apparel & Bags</span>
+                    <h3 class="product-title" data-i18n="p2_t">T-Shirts</h3>
+                    <p class="product-desc" data-i18n="p2_d">Premium DTG and screen-printed t-shirts with vibrant, long-lasting designs.</p>
+                    <a href="https://wa.me/966536801025?text=السلام%20عليكم%20ممكن%20تفاصيل%20اكثر%20عن%20T-Shirts" target="_blank" class="product-btn" title="Order T-Shirts on WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
             </div>
-            <div class="portfolio-item" data-category="packaging" data-aos="zoom-in" data-aos-delay="200">
-                <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f?q=80&w=600&auto=format&fit=crop" alt="Box">
-                <div class="label">Luxury Rigid Box</div>
+
+            <!-- Product 3: Safety Vests -->
+            <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="product-img-wrapper">
+                    <!-- الصورة من مجلد Product-Images -->
+                    <img src="Product-Images/safety-vests.jpg" alt="Safety Vests">
+                </div>
+                <div class="product-info">
+                    <span class="product-category" data-i18n="cat_apparel">Apparel & Bags</span>
+                    <h3 class="product-title" data-i18n="p3_t">Safety Vests</h3>
+                    <p class="product-desc" data-i18n="p3_d">High-visibility safety vests with custom logo printing for construction and events.</p>
+                    <a href="https://wa.me/966536801025?text=السلام%20عليكم%20ممكن%20تفاصيل%20اكثر%20عن%20Safety%20Vests" target="_blank" class="product-btn" title="Order Safety Vests on WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
             </div>
-            <div class="portfolio-item" data-category="banners" data-aos="zoom-in" data-aos-delay="300">
-                <img src="https://images.unsplash.com/photo-1563205764-79b716371c85?q=80&w=600&auto=format&fit=crop" alt="Banner">
-                <div class="label">Exhibition Banner</div>
+
+            <!-- Product 4: Roll-up & Banners -->
+            <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-img-wrapper">
+                    <!-- الصورة من مجلد Product-Images -->
+                    <img src="Product-Images/banners.jpg" alt="Banners">
+                </div>
+                <div class="product-info">
+                    <span class="product-category" data-i18n="cat_large">Large Format</span>
+                    <h3 class="product-title" data-i18n="p4_t">Roll-up & Banners</h3>
+                    <p class="product-desc" data-i18n="p4_d">Eye-catching roll-up stands, forex boards, and large format banners.</p>
+                    <a href="https://wa.me/966536801025?text=السلام%20عليكم%20ممكن%20تفاصيل%20اكثر%20عن%20Roll-up%20and%20Banners" target="_blank" class="product-btn" title="Order Banners on WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
             </div>
-            <div class="portfolio-item" data-category="cards" data-aos="zoom-in" data-aos-delay="400">
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop" alt="Spot UV">
-                <div class="label">Spot UV Business Card</div>
+
+            <!-- Product 5: Canvas Prints -->
+            <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="product-img-wrapper">
+                    <!-- الصورة من مجلد Product-Images -->
+                    <img src="Product-Images/canvas.jpg" alt="Canvas">
+                </div>
+                <div class="product-info">
+                    <span class="product-category" data-i18n="cat_large">Large Format</span>
+                    <h3 class="product-title" data-i18n="p5_t">Canvas Prints</h3>
+                    <p class="product-desc" data-i18n="p5_d">Museum-quality canvas prints stretched on wooden frames for stunning wall art.</p>
+                    <a href="https://wa.me/966536801025?text=السلام%20عليكم%20ممكن%20تفاصيل%20اكثر%20عن%20Canvas%20Prints" target="_blank" class="product-btn" title="Order Canvas Prints on WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
             </div>
+
+            <!-- Product 6: Brochures & Menus -->
+            <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="product-img-wrapper">
+                    <!-- الصورة من مجلد Product-Images -->
+                    <img src="Product-Images/brochures.jpg" alt="Brochures">
+                </div>
+                <div class="product-info">
+                    <span class="product-category" data-i18n="cat_digital">Digital Printing</span>
+                    <h3 class="product-title" data-i18n="p6_t">Brochures & Menus</h3>
+                    <p class="product-desc" data-i18n="p6_d">High-quality brochures, menus, and catalogs printed on premium paper stock.</p>
+                    <a href="https://wa.me/966536801025?text=السلام%20عليكم%20ممكن%20تفاصيل%20اكثر%20عن%20Brochures%20and%20Menus" target="_blank" class="product-btn" title="Order Brochures on WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Product 7: Die-Cut Stickers -->
+            <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-img-wrapper">
+                    <!-- الصورة من مجلد Product-Images -->
+                    <img src="Product-Images/stickers.jpg" alt="Stickers">
+                </div>
+                <div class="product-info">
+                    <span class="product-category" data-i18n="cat_digital">Digital Printing</span>
+                    <h3 class="product-title" data-i18n="p7_t">Die-Cut Stickers</h3>
+                    <p class="product-desc" data-i18n="p7_d">Custom shaped die-cut stickers with vibrant colors for branding and packaging.</p>
+                    <a href="https://wa.me/966536801025?text=السلام%20عليكم%20ممكن%20تفاصيل%20اكثر%20عن%20Die-Cut%20Stickers" target="_blank" class="product-btn" title="Order Stickers on WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Product 8: 3D Letters -->
+            <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="product-img-wrapper">
+                    <!-- الصورة من مجلد Product-Images -->
+                    <img src="Product-Images/3d-letters.jpg" alt="3D Letters">
+                </div>
+                <div class="product-info">
+                    <span class="product-category" data-i18n="cat_signs">Signage</span>
+                    <h3 class="product-title" data-i18n="p8_t">3D Letters</h3>
+                    <p class="product-desc" data-i18n="p8_d">Stainless steel and acrylic 3D letters for premium company signage.</p>
+                    <a href="https://wa.me/966536801025?text=السلام%20عليكم%20ممكن%20تفاصيل%20اكثر%20عن%203D%20Letters" target="_blank" class="product-btn" title="Order 3D Letters on WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -560,23 +709,23 @@
         <div class="process-grid">
             <div class="process-step" data-aos="fade-right" data-aos-delay="100">
                 <div class="process-icon"><i class="fa-solid fa-comments"></i></div>
-                <h3 data-i18n="p1_t">Consult</h3>
-                <p data-i18n="p1_d">We listen to your vision, needs, and budget.</p>
+                <h3 data-i18n="p1_t_process">Consult</h3>
+                <p data-i18n="p1_d_process">We listen to your vision, needs, and budget.</p>
             </div>
             <div class="process-step" data-aos="fade-right" data-aos-delay="200">
                 <div class="process-icon"><i class="fa-solid fa-pen-nib"></i></div>
-                <h3 data-i18n="p2_t">Design</h3>
-                <p data-i18n="p2_d">Our experts prepare the files for flawless printing.</p>
+                <h3 data-i18n="p2_t_process">Design</h3>
+                <p data-i18n="p2_d_process">Our experts prepare the files for flawless printing.</p>
             </div>
             <div class="process-step" data-aos="fade-right" data-aos-delay="300">
                 <div class="process-icon"><i class="fa-solid fa-gears"></i></div>
-                <h3 data-i18n="p3_t">Print</h3>
-                <p data-i18n="p3_d">State-of-the-art machines bring it to life.</p>
+                <h3 data-i18n="p3_t_process">Print</h3>
+                <p data-i18n="p3_d_process">State-of-the-art machines bring it to life.</p>
             </div>
             <div class="process-step" data-aos="fade-right" data-aos-delay="400">
                 <div class="process-icon"><i class="fa-solid fa-truck-fast"></i></div>
-                <h3 data-i18n="p4_t">Deliver</h3>
-                <p data-i18n="p4_d">Quality checked and delivered right to your door.</p>
+                <h3 data-i18n="p4_t_process">Deliver</h3>
+                <p data-i18n="p4_d_process">Quality checked and delivered right to your door.</p>
             </div>
         </div>
     </section>
@@ -595,10 +744,14 @@
                 <div class="form-group">
                     <label data-i18n="form_service">Service</label>
                     <select id="q-service" class="form-control" required>
-                        <option value="Offset/Digital" data-i18n="opt_1">Offset / Digital Printing</option>
-                        <option value="Packaging" data-i18n="opt_2">Custom Packaging</option>
-                        <option value="Finishes" data-i18n="opt_3">Premium Finishes (Foil/UV)</option>
-                        <option value="Large Format" data-i18n="opt_4">Large Format / Banners</option>
+                        <option value="Tote Bags" data-i18n="opt_tote">Tote Bags</option>
+                        <option value="T-Shirts" data-i18n="opt_tshirt">T-Shirts</option>
+                        <option value="Safety Vests" data-i18n="opt_vest">Safety Vests</option>
+                        <option value="Banners" data-i18n="opt_banner">Roll-up & Banners</option>
+                        <option value="Canvas" data-i18n="opt_canvas">Canvas Prints</option>
+                        <option value="Brochures" data-i18n="opt_brochure">Brochures & Menus</option>
+                        <option value="Stickers" data-i18n="opt_sticker">Die-Cut Stickers</option>
+                        <option value="3D Letters" data-i18n="opt_3d">3D Letters</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -681,24 +834,18 @@
         </a>
     </div>
 
-    <!-- AOS Script -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Initialize AOS Animations
-        AOS.init({
-            once: true, // Animation happens only once
-            offset: 50, // Offset from viewport
-            duration: 800 // Animation duration
-        });
+        AOS.init({ once: true, offset: 50, duration: 800 });
 
-        // Custom Cursor Logic
+        // Custom Cursor
         const cursor = document.getElementById('cursor');
         if (window.matchMedia("(min-width: 1024px)").matches) {
             document.addEventListener('mousemove', (e) => {
                 cursor.style.left = e.clientX + 'px';
                 cursor.style.top = e.clientY + 'px';
             });
-            document.querySelectorAll('a, button, .bento-card, .portfolio-item').forEach(link => {
+            document.querySelectorAll('a, button, .bento-card, .product-card').forEach(link => {
                 link.addEventListener('mouseenter', () => cursor.classList.add('hover'));
                 link.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
             });
@@ -727,7 +874,7 @@
 
         const translations = {
             en: {
-                nav_home: "Home", nav_services: "Services", nav_portfolio: "Portfolio", nav_quote: "Quote", nav_call: "Call", nav_wa: "WhatsApp", nav_quote_short: "Quote",
+                nav_home: "Home", nav_services: "Services", nav_products: "Products", nav_quote: "Quote", nav_call: "Call", nav_wa: "WhatsApp", nav_quote_short: "Quote",
                 hero_title_1: "Next-Gen", hero_title_2: "Printing",
                 hero_desc: "We don't just print; we engineer experiences. Premium quality, cutting-edge finishes, and unmatched speed.",
                 btn_start: "Start a Project", btn_wa: "WhatsApp Us",
@@ -736,17 +883,30 @@
                 s2_t: "Foil Stamping", s2_d: "Metallic gold, silver, and holographic foils for that ultra-premium touch.",
                 s3_t: "Spot UV & Embossing", s3_d: "Tactile, 3D textures and high-gloss raised finishes.",
                 s4_t: "Custom Packaging", s4_d: "Unboxing experiences that elevate your brand. Die-cutting, folding cartons, and luxury rigid boxes.",
-                port_sub: "Our Work", port_title: "Recent Projects",
-                f_all: "All", f_cards: "Business Cards", f_pack: "Packaging", f_banners: "Banners",
+                
+                prod_sub: "What We Print", prod_title: "Our Products",
+                cat_apparel: "Apparel & Bags", cat_large: "Large Format", cat_digital: "Digital Printing", cat_signs: "Signage",
+                p1_t: "Tote Bags", p1_d: "High-quality canvas tote bags with custom printed artwork, perfect for retail and events.",
+                p2_t: "T-Shirts", p2_d: "Premium DTG and screen-printed t-shirts with vibrant, long-lasting designs.",
+                p3_t: "Safety Vests", p3_d: "High-visibility safety vests with custom logo printing for construction and events.",
+                p4_t: "Roll-up & Banners", p4_d: "Eye-catching roll-up stands, forex boards, and large format banners.",
+                p5_t: "Canvas Prints", p5_d: "Museum-quality canvas prints stretched on wooden frames for stunning wall art.",
+                p6_t: "Brochures & Menus", p6_d: "High-quality brochures, menus, and catalogs printed on premium paper stock.",
+                p7_t: "Die-Cut Stickers", p7_d: "Custom shaped die-cut stickers with vibrant colors for branding and packaging.",
+                p8_t: "3D Letters", p8_d: "Stainless steel and acrylic 3D letters for premium company signage.",
+
                 proc_sub: "How We Work", proc_title: "Our Process",
-                p1_t: "Consult", p1_d: "We listen to your vision, needs, and budget.",
-                p2_t: "Design", p2_d: "Our experts prepare the files for flawless printing.",
-                p3_t: "Print", p3_d: "State-of-the-art machines bring it to life.",
-                p4_t: "Deliver", p4_d: "Quality checked and delivered right to your door.",
+                p1_t_process: "Consult", p1_d_process: "We listen to your vision, needs, and budget.",
+                p2_t_process: "Design", p2_d_process: "Our experts prepare the files for flawless printing.",
+                p3_t_process: "Print", p3_d_process: "State-of-the-art machines bring it to life.",
+                p4_t_process: "Deliver", p4_d_process: "Quality checked and delivered right to your door.",
+                
                 q_sub: "Get Started", q_title: "Request a Quote",
                 form_name: "Your Name", form_service: "Service", form_details: "Project Details (Size, Quantity, etc.)",
-                opt_1: "Offset / Digital Printing", opt_2: "Custom Packaging", opt_3: "Premium Finishes (Foil/UV)", opt_4: "Large Format / Banners",
+                opt_tote: "Tote Bags", opt_tshirt: "T-Shirts", opt_vest: "Safety Vests", opt_banner: "Roll-up & Banners",
+                opt_canvas: "Canvas Prints", opt_brochure: "Brochures & Menus", opt_sticker: "Die-Cut Stickers", opt_3d: "3D Letters",
                 btn_send: "Send via WhatsApp",
+                
                 faq_sub: "Questions", faq_title: "Frequently Asked",
                 faq_1_q: "What is your typical turnaround time?", faq_1_a: "Standard digital printing takes 2-3 business days. Offset printing and custom packaging typically take 5-7 business days depending on the complexity of the finishes.",
                 faq_2_q: "Do you offer design services?", faq_2_a: "Yes, our in-house design team can help create your artwork from scratch or refine your existing files to ensure they are print-ready.",
@@ -754,7 +914,7 @@
                 btn_dir: "Get Directions", lang_btn: "عربي"
             },
             ar: {
-                nav_home: "الرئيسية", nav_services: "الخدمات", nav_portfolio: "أعمالنا", nav_quote: "عرض سعر", nav_call: "اتصال", nav_wa: "واتساب", nav_quote_short: "عرض سعر",
+                nav_home: "الرئيسية", nav_services: "الخدمات", nav_products: "منتجاتنا", nav_quote: "عرض سعر", nav_call: "اتصال", nav_wa: "واتساب", nav_quote_short: "عرض سعر",
                 hero_title_1: "طباعة", hero_title_2: "الجيل القادم",
                 hero_desc: "نحن لا نطبع فقط؛ بل نصنع التجارب. جودة عالية، لمسات نهائية متطورة، وسرعة لا مثيل لها.",
                 btn_start: "ابدأ مشروعك", btn_wa: "تواصل واتساب",
@@ -763,17 +923,30 @@
                 s2_t: "الطباعة بالرقائق", s2_d: "رقائق ذهبية وفضية وهولوغرام للمسة فائقة الفخامة.",
                 s3_t: "طلاء UV والنقش", s3_d: "ملمس ثلاثي الأبعاد وتشطيبات لامعة بارزة.",
                 s4_t: "تغليف مخصص", s4_d: "تجارب فتح صندوق ترتقي بعلامتك التجارية. علب فاخرة ومبتكرة.",
-                port_sub: "أعمالنا", port_title: "مشاريع حديثة",
-                f_all: "الكل", f_cards: "بطاقات عمل", f_pack: "تغليف", f_banners: "لافتات",
+                
+                prod_sub: "ماذا نطبع", prod_title: "منتجاتنا",
+                cat_apparel: "ملابس وحقائب", cat_large: "طباعة كبيرة", cat_digital: "طباعة رقمية", cat_signs: "لافتات",
+                p1_t: "الحقائب القماشية", p1_d: "حقائب قماشية عالية الجودة مع رسومات مطبوعة حسب الطلب، مثالية للبيع بالتجزئة والفعاليات.",
+                p2_t: "التيشيرات", p2_d: "تيشيرتات مطبوعة بتقنية DTG والطباعة بالشاشة بتصاميم نابضة بالحياة وطويلة الأمد.",
+                p3_t: "سترات السلامة", p3_d: "سترات سلامة عالية الوضوح مع طباعة شعار مخصص لمواقع البناء والفعاليات.",
+                p4_t: "رول أب و بنرات", p4_d: "لافتات رول أب جذابة، ألواح فوركس، وبنرات كبيرة الحجم.",
+                p5_t: "لوحات الكنافاس", p5_d: "مطبوعات كانفاس بجودة المتاحف مشدودة على إطارات خشبية لفن جداري مذهل.",
+                p6_t: "بروشورات ومنيوهات", p6_d: "بروشورات، منيوهات، وكتالوجات عالية الجودة مطبوعة على ورق فاخر.",
+                p7_t: "ملصقات بقص خاص", p7_d: "ملصقات مقطوعة بأشكال مخصصة بألوان نابضة بالحياة للعلامات التجارية والتغليف.",
+                p8_t: "حروف بارزة 3D", p8_d: "حروف ثلاثية الأبعاد من الستانلس ستيل والأكريليك للافتات الشركات الفاخرة.",
+
                 proc_sub: "كيف نعمل", proc_title: "خطوات العمل",
-                p1_t: "استشارة", p1_d: "نستمع لرؤيتك واحتياجاتك وميزانيتك.",
-                p2_t: "تصميم", p2_d: "خبراؤنا يجهزون الملفات لطباعة خالية من العيوب.",
-                p3_t: "طباعة", p3_d: "آلات حديثة تبعث الحياة في تصميمك.",
-                p4_t: "تسليم", p4_d: "يتم فحص الجودة وتسليمها إلى باب منزلك.",
+                p1_t_process: "استشارة", p1_d_process: "نستمع لرؤيتك واحتياجاتك وميزانيتك.",
+                p2_t_process: "تصميم", p2_d_process: "خبراؤنا يجهزون الملفات لطباعة خالية من العيوب.",
+                p3_t_process: "طباعة", p3_d_process: "آلات حديثة تبعث الحياة في تصميمك.",
+                p4_t_process: "تسليم", p4_d_process: "يتم فحص الجودة وتسليمها إلى باب منزلك.",
+                
                 q_sub: "ابدأ الآن", q_title: "اطلب عرض سعر",
                 form_name: "اسمك", form_service: "الخدمة", form_details: "تفاصيل المشروع (المقاس، الكمية، إلخ)",
-                opt_1: "طباعة أوفست / ديجيتال", opt_2: "تغليف مخصص", opt_3: "لمسات فاخرة (رقائق/UV)", opt_4: "طباعة كبيرة / لافتات",
+                opt_tote: "حقائب قماشية", opt_tshirt: "تيشيرتات", opt_vest: "سترات سلامة", opt_banner: "رول أب وبنرات",
+                opt_canvas: "لوحات كنافاس", opt_brochure: "بروشورات ومنيوهات", opt_sticker: "ملصقات بقص خاص", opt_3d: "حروف بارزة 3D",
                 btn_send: "إرسال عبر واتساب",
+                
                 faq_sub: "أسئلة", faq_title: "الأسئلة الشائعة",
                 faq_1_q: "ما هو وقت التنفيذ المعتاد؟", faq_1_a: "تستغرق الطباعة الديجيتال 2-3 أيام عمل. أما الأوفست والتغليف المخصص فيستغرقان عادة 5-7 أيام عمل.",
                 faq_2_q: "هل تقدمون خدمات تصميم؟", faq_2_a: "نعم، يمكن لفريق التصميم الداخلي لدينا مساعدتك في إنشاء عملك الفني من الصفر أو تحسين ملفاتك الحالية.",
@@ -793,35 +966,11 @@
             });
             langBtn.textContent = translations[currentLang].lang_btn;
             
-            // Update glitch data-text
             if(currentLang === 'ar') {
                 document.querySelector('.glitch').setAttribute('data-text', 'طباعة');
             } else {
                 document.querySelector('.glitch').setAttribute('data-text', 'Next-Gen');
             }
-        });
-
-        // Portfolio Filtering with Animation Reset
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                const filter = btn.getAttribute('data-filter');
-                
-                portfolioItems.forEach(item => {
-                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                        item.style.display = 'flex';
-                        setTimeout(() => item.style.opacity = '1', 50);
-                    } else {
-                        item.style.opacity = '0';
-                        setTimeout(() => item.style.display = 'none', 300);
-                    }
-                });
-            });
         });
 
         // Form to WhatsApp
