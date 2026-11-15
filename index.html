@@ -5,15 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Vision Storm | Next-Gen Printing</title>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=New+Rocker&family=Tajawal:wght@400;500;700;800&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     
-    <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -54,11 +50,9 @@
             transition: background 0.3s, color 0.3s;
         }
 
-        /* Hide scrollbars for sliders */
         ::-webkit-scrollbar { display: none; }
         * { scrollbar-width: none; }
 
-        /* FONTS */
         h1, h2, h3, .desktop-nav a, .btn, .section-header p, .map-btn, .bottom-nav-item span, .marquee-text, .product-title {
             font-family: 'New Rocker', cursive;
             font-weight: normal;
@@ -69,7 +63,6 @@
             font-weight: 700;
         }
 
-        /* HEADER */
         header {
             position: fixed; top: 0; left: 0; width: 100%; padding: 15px 5%;
             display: flex; justify-content: space-between; align-items: center;
@@ -88,7 +81,6 @@
         .icon-btn:hover { border-color: var(--accent); color: var(--accent); }
         .lang-btn { width: auto; padding: 0 15px; font-family: 'Outfit', sans-serif; font-weight: 600; }
 
-        /* HERO & MARQUEE */
         .hero { min-height: 100vh; padding: 120px 5% 60px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .hero-logo { width: 220px; background: var(--logo-bg); padding: var(--logo-padding); border-radius: 12px; margin-bottom: 30px; animation: float 4s ease-in-out infinite; filter: var(--logo-filter); transition: 0.3s; }
         @keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0); } }
@@ -103,18 +95,25 @@
         .btn-wa { background: var(--whatsapp); color: #fff; }
         .btn-wa:hover { background: #1eb955; transform: translateY(-5px); }
 
+        /* HERO SOCIAL ICONS */
+        .hero-social {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            margin-top: 40px;
+        }
+
         .marquee-container { width: 100%; overflow: hidden; background: var(--accent); color: #111; padding: 15px 0; display: flex; white-space: nowrap; border-top: 2px solid #111; border-bottom: 2px solid #111; }
         .marquee-content { display: flex; animation: marquee 15s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .marquee-text { font-size: 1.5rem; margin: 0 30px; display: flex; align-items: center; gap: 10px; }
 
-        /* SECTIONS */
         section { padding: 80px 5%; }
         .section-header { text-align: center; margin-bottom: 50px; }
         .section-header h2 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 10px; }
         .section-header p { color: var(--accent); letter-spacing: 2px; font-size: 1.1rem; }
 
-        /* SERVICES */
         .bento-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
         @media (min-width: 768px) { .bento-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1024px) { .bento-grid { grid-template-columns: repeat(4, 1fr); } }
@@ -124,195 +123,53 @@
         .bento-card h3 { font-size: 1.8rem; margin-bottom: 10px; }
         .bento-card p { color: var(--text-muted); font-size: 0.95rem; }
 
-        /* =========================================
-           THE NEW MASONRY / 2-COLUMN STYLE
-           ========================================= */
-        .products-grid { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); /* 2 Columns on Mobile! */
-            gap: 15px; 
-        }
-        
-        @media (min-width: 1024px) { 
-            .products-grid { grid-template-columns: repeat(3, 1fr); gap: 30px; } 
-        }
+        .products-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        @media (min-width: 1024px) { .products-grid { grid-template-columns: repeat(3, 1fr); gap: 30px; } }
 
-        .product-card {
-            background: var(--bg-card); 
-            border: 1px solid var(--border);
-            border-radius: 20px; 
-            overflow: hidden; 
-            display: flex; flex-direction: column;
-            position: relative;
-            transition: transform 0.2s, box-shadow 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .product-card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 15px 30px var(--accent-glow);
-        }
-        
+        .product-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; position: relative; transition: transform 0.2s, box-shadow 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .product-card:hover { border-color: var(--accent); box-shadow: 0 15px 30px var(--accent-glow); }
         .product-card:active { transform: scale(0.97); }
 
-        /* The Image Slider Container */
-        .slider-wrapper {
-            position: relative;
-            width: 100%;
-            background: #0f0f11;
-            border-bottom: 1px solid var(--border);
-            border-radius: 20px 20px 0 0;
-        }
+        .slider-wrapper { position: relative; width: 100%; background: #0f0f11; border-bottom: 1px solid var(--border); border-radius: 20px 20px 0 0; }
+        .product-slider { width: 100%; aspect-ratio: 1 / 1; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
+        .product-slider img { width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; scroll-snap-align: center; }
 
-        .product-slider {
-            width: 100%; 
-            aspect-ratio: 1 / 1;
-            display: flex; 
-            overflow-x: auto; 
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scroll-behavior: smooth;
-        }
-
-        .product-slider img {
-            width: 100%; height: 100%; 
-            object-fit: cover;
-            flex-shrink: 0; 
-            scroll-snap-align: center;
-        }
-
-        /* Category Badge */
-        .category-badge {
-            position: absolute;
-            top: 10px; left: 10px;
-            background: rgba(10, 10, 12, 0.8);
-            color: var(--accent);
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-            z-index: 10;
-            font-family: 'Outfit', sans-serif;
-        }
+        .category-badge { position: absolute; top: 10px; left: 10px; background: rgba(10, 10, 12, 0.8); color: var(--accent); padding: 4px 10px; border-radius: 15px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); z-index: 10; font-family: 'Outfit', sans-serif; }
         body[dir="rtl"] .category-badge { left: auto; right: 10px; }
 
-        /* Dots */
-        .slider-dots {
-            position: absolute;
-            bottom: 10px; left: 0; width: 100%;
-            display: flex; justify-content: center; gap: 4px;
-            z-index: 10;
-        }
-        
-        .dot {
-            width: 5px; height: 5px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            transition: all 0.3s ease;
-        }
-        
-        .dot.active {
-            width: 15px; 
-            border-radius: 10px;
-            background: var(--accent);
-        }
+        .slider-dots { position: absolute; bottom: 10px; left: 0; width: 100%; display: flex; justify-content: center; gap: 4px; z-index: 10; }
+        .dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255, 255, 255, 0.4); transition: all 0.3s ease; }
+        .dot.active { width: 15px; border-radius: 10px; background: var(--accent); }
 
-        /* Desktop Arrows */
-        .slider-btn {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            width: 30px; height: 30px; border-radius: 50%;
-            background: rgba(0,0,0,0.6); color: #fff; border: none;
-            display: none; justify-content: center; align-items: center; cursor: pointer; z-index: 10;
-            transition: 0.3s; font-size: 0.8rem;
-        }
+        .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 50%; background: rgba(0,0,0,0.6); color: #fff; border: none; display: none; justify-content: center; align-items: center; cursor: pointer; z-index: 10; transition: 0.3s; font-size: 0.8rem; }
         .slider-btn:hover { background: var(--accent); color: #111; }
         .slider-btn.prev { left: 10px; }
         .slider-btn.next { right: 10px; }
+        @media (min-width: 1024px) { .slider-btn { display: flex; } }
 
-        @media (min-width: 1024px) {
-            .slider-btn { display: flex; } 
-        }
+        .product-info { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
+        @media (min-width: 1024px) { .product-info { padding: 25px; } }
 
-        /* Product Info (Mobile Optimized) */
-        .product-info { 
-            padding: 15px; 
-            display: flex; 
-            flex-direction: column; 
-            flex-grow: 1; 
-        }
+        .product-title { font-size: 1rem; margin-bottom: 5px; color: var(--text-main); line-height: 1.2; }
+        @media (min-width: 1024px) { .product-title { font-size: 1.5rem; margin-bottom: 10px; } }
         
-        @media (min-width: 1024px) {
-            .product-info { padding: 25px; }
-        }
-
-        .product-title { 
-            font-size: 1rem; 
-            margin-bottom: 5px; 
-            color: var(--text-main);
-            line-height: 1.2;
-        }
+        .product-desc { display: none; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; flex-grow: 1; line-height: 1.5; }
+        @media (min-width: 1024px) { .product-desc { display: block; } }
         
-        @media (min-width: 1024px) {
-            .product-title { font-size: 1.5rem; margin-bottom: 10px; }
-        }
-        
-        .product-desc { 
-            display: none;
-            color: var(--text-muted); 
-            font-size: 0.9rem; 
-            margin-bottom: 15px; 
-            flex-grow: 1;
-            line-height: 1.5;
-        }
-        
-        @media (min-width: 1024px) {
-            .product-desc { display: block; }
-        }
-        
-        /* WhatsApp Button */
-        .product-btn {
-            background: rgba(37, 211, 102, 0.15);
-            color: var(--whatsapp);
-            border: 1px solid rgba(37, 211, 102, 0.3);
-            padding: 8px; 
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            font-size: 0.9rem; font-weight: 700;
-            text-decoration: none;
-            transition: 0.3s;
-            margin-top: auto;
-        }
-        
-        @media (min-width: 1024px) {
-            .product-btn { padding: 14px; border-radius: 12px; font-size: 1.1rem; }
-        }
-        
-        .product-btn:hover { 
-            background: var(--whatsapp); 
-            color: #fff; 
-        }
-
-        /* Hide text inside button on mobile */
+        .product-btn { background: rgba(37, 211, 102, 0.15); color: var(--whatsapp); border: 1px solid rgba(37, 211, 102, 0.3); padding: 8px; border-radius: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.9rem; font-weight: 700; text-decoration: none; transition: 0.3s; margin-top: auto; }
+        @media (min-width: 1024px) { .product-btn { padding: 14px; border-radius: 12px; font-size: 1.1rem; } }
+        .product-btn:hover { background: var(--whatsapp); color: #fff; }
         .product-btn span { display: none; }
         @media (min-width: 1024px) { .product-btn span { display: inline; } }
 
         /* =========================================
-           SOCIAL MEDIA
+           SOCIAL ICONS (used in hero + footer)
            ========================================= */
-        .social-section {
-            padding: 80px 5% 70px;
-            text-align: center;
-            background: var(--bg-main);
-        }
-
         .social-links {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 22px;
+            gap: 20px;
             flex-wrap: wrap;
         }
 
@@ -320,13 +177,13 @@
             --brand-grad: var(--accent);
             --brand-glow: var(--accent-glow);
             position: relative;
-            width: 68px;
-            height: 68px;
+            width: 62px;
+            height: 62px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.7rem;
+            font-size: 1.55rem;
             text-decoration: none;
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -440,7 +297,6 @@
         .fab-wa { background: var(--whatsapp); box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4); }
         .fab-call { background: var(--accent); color: #111; box-shadow: 0 5px 15px var(--accent-glow); }
 
-        /* Map & Footer */
         .map-wrapper { height: 300px; width: 100%; display: block; position: relative; }
         .map-wrapper iframe { width: 100%; height: 100%; border: none; filter: grayscale(100%); }
         footer { background: #000; text-align: center; padding: 30px; color: #666; }
@@ -468,6 +324,19 @@
         <div class="hero-btns">
             <a href="#quote" class="btn btn-primary" data-i18n="btn_start">Start a Project</a>
             <a href="https://wa.me/966536801025" target="_blank" class="btn btn-wa"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="btn_wa">WhatsApp Us</span></a>
+        </div>
+
+        <!-- SOCIAL ICONS (below WhatsApp, above marquee) -->
+        <div class="social-links hero-social">
+            <a href="https://www.instagram.com/visionstorm.sa" target="_blank" rel="noopener" class="social-link instagram" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.tiktok.com/@visionstorm.sa" target="_blank" rel="noopener" class="social-link tiktok" aria-label="TikTok">
+                <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://www.facebook.com/share/1E7E3424XD/" target="_blank" rel="noopener" class="social-link facebook" aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
         </div>
     </section>
 
@@ -519,7 +388,6 @@
         
         <div class="products-grid">
             
-            <!-- PRODUCT 1 -->
             <div class="product-card">
                 <div class="slider-wrapper">
                     <span class="category-badge" data-i18n="cat_apparel">Apparel</span>
@@ -541,7 +409,6 @@
                 </div>
             </div>
 
-            <!-- PRODUCT 2 -->
             <div class="product-card">
                 <div class="slider-wrapper">
                     <span class="category-badge" data-i18n="cat_apparel">Apparel</span>
@@ -564,7 +431,6 @@
                 </div>
             </div>
 
-            <!-- PRODUCT 3 -->
             <div class="product-card">
                 <div class="slider-wrapper">
                     <span class="category-badge" data-i18n="cat_apparel">Apparel</span>
@@ -586,7 +452,6 @@
                 </div>
             </div>
 
-            <!-- PRODUCT 4 -->
             <div class="product-card">
                 <div class="slider-wrapper">
                     <span class="category-badge" data-i18n="cat_large">Large Format</span>
@@ -606,7 +471,6 @@
                 </div>
             </div>
 
-            <!-- PRODUCT 5 -->
             <div class="product-card">
                 <div class="slider-wrapper">
                     <span class="category-badge" data-i18n="cat_large">Large Format</span>
@@ -626,7 +490,6 @@
                 </div>
             </div>
 
-            <!-- PRODUCT 6 -->
             <div class="product-card">
                 <div class="slider-wrapper">
                     <span class="category-badge" data-i18n="cat_digital">Digital</span>
@@ -646,7 +509,6 @@
                 </div>
             </div>
 
-            <!-- PRODUCT 7 -->
             <div class="product-card">
                 <div class="slider-wrapper">
                     <span class="category-badge" data-i18n="cat_digital">Digital</span>
@@ -666,7 +528,6 @@
                 </div>
             </div>
 
-            <!-- PRODUCT 8 -->
             <div class="product-card">
                 <div class="slider-wrapper">
                     <span class="category-badge" data-i18n="cat_signs">Signage</span>
@@ -686,25 +547,6 @@
                 </div>
             </div>
 
-        </div>
-    </section>
-
-    <!-- SOCIAL MEDIA SECTION -->
-    <section id="social" class="social-section">
-        <div class="section-header" style="margin-bottom: 35px;">
-            <p data-i18n="social_sub">Stay Connected</p>
-            <h2 data-i18n="social_title">Follow Us</h2>
-        </div>
-        <div class="social-links">
-            <a href="https://www.instagram.com/visionstorm.sa" target="_blank" rel="noopener" class="social-link instagram" aria-label="Instagram">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.tiktok.com/@visionstorm.sa" target="_blank" rel="noopener" class="social-link tiktok" aria-label="TikTok">
-                <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://www.facebook.com/share/1E7E3424XD/" target="_blank" rel="noopener" class="social-link facebook" aria-label="Facebook">
-                <i class="fa-brands fa-facebook-f"></i>
-            </a>
         </div>
     </section>
 
@@ -738,7 +580,6 @@
     <script>
         AOS.init({ once: true, offset: 50, duration: 800 });
 
-        // THEME TOGGLE
         const themeBtn = document.getElementById('theme-toggle');
         const themeIcon = themeBtn.querySelector('i');
         const body = document.body;
@@ -755,7 +596,6 @@
             themeIcon.classList.replace(isLight ? 'fa-moon' : 'fa-sun', isLight ? 'fa-sun' : 'fa-moon');
         });
 
-        // LANGUAGE TOGGLE
         const langBtn = document.getElementById('lang-toggle');
         let currentLang = 'en';
 
@@ -780,7 +620,6 @@
                 p6_t: "Brochures & Menus", p6_d: "High-quality brochures, menus, and catalogs printed on premium paper.",
                 p7_t: "Die-Cut Stickers", p7_d: "Custom shaped die-cut stickers with vibrant colors.",
                 p8_t: "3D Letters", p8_d: "Stainless steel and acrylic 3D letters for premium signage.",
-                social_sub: "Stay Connected", social_title: "Follow Us",
                 lang_btn: "عربي"
             },
             ar: {
@@ -803,7 +642,6 @@
                 p6_t: "بروشورات ومنيوهات", p6_d: "بروشورات، منيوهات، وكتالوجات عالية الجودة مطبوعة على ورق فاخر.",
                 p7_t: "ملصقات بقص خاص", p7_d: "ملصقات مقطوعة بأشكال مخصصة بألوان نابضة بالحياة.",
                 p8_t: "حروف بارزة 3D", p8_d: "حروف ثلاثية الأبعاد من الستانلس ستيل والأكريليك للافتات الشركات الفاخرة.",
-                social_sub: "ابقَ على تواصل", social_title: "تابعنا",
                 lang_btn: "EN"
             }
         };
@@ -822,7 +660,6 @@
             langBtn.textContent = translations[currentLang].lang_btn;
         });
 
-        // SLIDER LOGIC WITH DOTS
         document.querySelectorAll('.slider-wrapper').forEach(wrapper => {
             const slider = wrapper.querySelector('.product-slider');
             const images = slider.querySelectorAll('img');
