@@ -95,7 +95,6 @@
         .btn-wa { background: var(--whatsapp); color: #fff; }
         .btn-wa:hover { background: #1eb955; transform: translateY(-5px); }
 
-        /* HERO SOCIAL ICONS */
         .hero-social {
             display: flex;
             justify-content: center;
@@ -163,7 +162,8 @@
         @media (min-width: 1024px) { .product-btn span { display: inline; } }
 
         /* =========================================
-           SOCIAL ICONS (used in hero + footer)
+           SOCIAL ICONS — REAL BRAND COLORS
+           (same in dark & light mode)
            ========================================= */
         .social-links {
             display: flex;
@@ -174,8 +174,6 @@
         }
 
         .social-link {
-            --brand-grad: var(--accent);
-            --brand-glow: var(--accent-glow);
             position: relative;
             width: 62px;
             height: 62px;
@@ -185,72 +183,58 @@
             align-items: center;
             font-size: 1.55rem;
             text-decoration: none;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            transition: transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .4s, border-color .4s;
-            isolation: isolate;
+            border: none;
+            transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s;
+            color: #fff; /* white icon always */
         }
 
         .social-link i {
-            position: relative;
-            z-index: 2;
-            transition: color .35s ease, transform .4s cubic-bezier(.34,1.56,.64,1);
-        }
-
-        .social-link::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            background: var(--brand-grad);
-            transform: scale(.2);
-            opacity: 0;
-            transition: transform .45s cubic-bezier(.34,1.56,.64,1), opacity .35s;
-            z-index: 1;
-        }
-
-        .social-link::after {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border-radius: 50%;
-            border: 1px solid var(--brand-glow);
-            opacity: 0;
-            z-index: 0;
+            color: #fff;
+            transition: transform .35s cubic-bezier(.34,1.56,.64,1);
         }
 
         .social-link:hover {
-            transform: translateY(-8px);
-            border-color: transparent;
-            box-shadow: 0 15px 35px var(--brand-glow);
+            transform: translateY(-8px) scale(1.06);
         }
-        .social-link:hover::before { transform: scale(1); opacity: 1; }
-        .social-link:hover i { color: #fff; transform: scale(1.12); }
-        .social-link:hover::after { animation: socialRing .9s ease-out; }
-
-        @keyframes socialRing {
-            0%   { opacity: .9; transform: scale(1); }
-            100% { opacity: 0;  transform: scale(1.5); }
+        .social-link:hover i {
+            transform: scale(1.12);
         }
 
-        .social-link.facebook {
-            --brand-grad: linear-gradient(135deg, #1877F2, #0b4db3);
-            --brand-glow: rgba(24, 119, 242, .5);
-        }
-        .social-link.facebook i { color: #1877F2; }
-
+        /* Instagram — real gradient */
         .social-link.instagram {
-            --brand-grad: linear-gradient(45deg, #f9ce34, #ee2a7b 50%, #6228d7);
-            --brand-glow: rgba(238, 42, 123, .5);
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            box-shadow: 0 6px 20px rgba(214, 36, 159, .35);
         }
-        .social-link.instagram i { color: #ee2a7b; }
+        .social-link.instagram:hover {
+            box-shadow: 0 14px 32px rgba(214, 36, 159, .55);
+        }
 
+        /* TikTok — real black with subtle cyan/pink shadow */
         .social-link.tiktok {
-            --brand-grad: linear-gradient(135deg, #25F4EE, #010101 50%, #FE2C55);
-            --brand-glow: rgba(254, 44, 85, .5);
+            background: #000000;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, .35);
         }
-        .social-link.tiktok i { color: #25F4EE; }
+        .social-link.tiktok i {
+            color: #fff;
+            text-shadow:
+                -2px -2px 0 rgba(37, 244, 238, .9),
+                 2px  2px 0 rgba(254, 44, 85, .9);
+        }
+        .social-link.tiktok:hover {
+            box-shadow: 0 14px 32px rgba(37, 244, 238, .35), 0 14px 32px rgba(254, 44, 85, .35);
+        }
 
+        /* Facebook — real blue */
+        .social-link.facebook {
+            background: #1877F2;
+            box-shadow: 0 6px 20px rgba(24, 119, 242, .4);
+        }
+        .social-link.facebook:hover {
+            background: #0e63d6;
+            box-shadow: 0 14px 32px rgba(24, 119, 242, .55);
+        }
+
+        /* FOOTER social — real brand colors too */
         .footer-social {
             display: flex;
             justify-content: center;
@@ -264,17 +248,34 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, .06);
-            border: 1px solid rgba(255, 255, 255, .12);
-            color: #b9b9c4;
             font-size: 1.05rem;
             text-decoration: none;
-            transition: .3s;
+            color: #fff;
+            transition: transform .3s, box-shadow .3s;
         }
-        .footer-social a:hover { transform: translateY(-4px); color: #fff; }
-        .footer-social a.instagram:hover { background: linear-gradient(45deg, #f9ce34, #ee2a7b 50%, #6228d7); border-color: transparent; }
-        .footer-social a.tiktok:hover    { background: #010101; border-color: #25F4EE; box-shadow: 0 0 15px rgba(37, 244, 238, .45); }
-        .footer-social a.facebook:hover  { background: #1877F2; border-color: transparent; }
+        .footer-social a i { color: #fff; }
+        .footer-social a:hover { transform: translateY(-4px) scale(1.06); }
+
+        .footer-social a.instagram {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+        }
+        .footer-social a.instagram:hover { box-shadow: 0 8px 20px rgba(214, 36, 159, .5); }
+
+        .footer-social a.tiktok {
+            background: #000000;
+            border: 1px solid rgba(255,255,255,.15);
+        }
+        .footer-social a.tiktok i {
+            text-shadow:
+                -1.5px -1.5px 0 rgba(37, 244, 238, .9),
+                 1.5px  1.5px 0 rgba(254, 44, 85, .9);
+        }
+        .footer-social a.tiktok:hover { box-shadow: 0 8px 20px rgba(37, 244, 238, .4); }
+
+        .footer-social a.facebook {
+            background: #1877F2;
+        }
+        .footer-social a.facebook:hover { background: #0e63d6; box-shadow: 0 8px 20px rgba(24, 119, 242, .5); }
 
         /* MOBILE NAV & FABS */
         .mobile-bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 10, 12, 0.95); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 10px 0; z-index: 1000; padding-bottom: env(safe-area-inset-bottom); }
@@ -326,7 +327,7 @@
             <a href="https://wa.me/966536801025" target="_blank" class="btn btn-wa"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="btn_wa">WhatsApp Us</span></a>
         </div>
 
-        <!-- SOCIAL ICONS (below WhatsApp, above marquee) -->
+        <!-- SOCIAL ICONS -->
         <div class="social-links hero-social">
             <a href="https://www.instagram.com/visionstorm.sa" target="_blank" rel="noopener" class="social-link instagram" aria-label="Instagram">
                 <i class="fa-brands fa-instagram"></i>
