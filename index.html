@@ -53,34 +53,96 @@
         ::-webkit-scrollbar { display: none; }
         * { scrollbar-width: none; }
 
-        h1, h2, h3, .desktop-nav a, .btn, .section-header p, .map-btn, .bottom-nav-item span, .marquee-text, .product-title {
+        h1, h2, h3, .btn, .section-header p, .map-btn, .bottom-nav-item span, .marquee-text, .product-title {
             font-family: 'New Rocker', cursive;
             font-weight: normal;
         }
 
-        body[dir="rtl"] h1, body[dir="rtl"] h2, body[dir="rtl"] h3, body[dir="rtl"] .btn, body[dir="rtl"] .desktop-nav a, body[dir="rtl"] .section-header p, body[dir="rtl"] .map-btn, body[dir="rtl"] .bottom-nav-item span, body[dir="rtl"] .marquee-text, body[dir="rtl"] .product-title {
+        body[dir="rtl"] h1, body[dir="rtl"] h2, body[dir="rtl"] h3, body[dir="rtl"] .btn, body[dir="rtl"] .section-header p, body[dir="rtl"] .map-btn, body[dir="rtl"] .bottom-nav-item span, body[dir="rtl"] .marquee-text, body[dir="rtl"] .product-title {
             font-family: 'Tajawal', sans-serif;
             font-weight: 700;
         }
 
+        /* HEADER */
         header {
-            position: fixed; top: 0; left: 0; width: 100%; padding: 15px 5%;
+            position: fixed; top: 0; left: 0; width: 100%; padding: 12px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            background: rgba(10, 10, 12, 0.8); backdrop-filter: blur(15px); z-index: 1000;
+            background: rgba(10, 10, 12, 0.85); backdrop-filter: blur(15px); z-index: 1000;
             border-bottom: 1px solid var(--border);
+            gap: 15px;
         }
-        body.light-mode header { background: rgba(244, 244, 246, 0.8); }
+        body.light-mode header { background: rgba(244, 244, 246, 0.85); }
         .logo-container img { height: 40px; background: var(--logo-bg); padding: var(--logo-padding); border-radius: 8px; object-fit: contain; filter: var(--logo-filter); transition: 0.3s; }
-        
-        .desktop-nav { display: none; gap: 30px; }
-        .desktop-nav a { color: var(--text-main); text-decoration: none; font-size: 1.3rem; }
-        .desktop-nav a:hover { color: var(--accent); }
 
-        .header-controls { display: flex; gap: 10px; align-items: center; }
-        .icon-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-main); width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.3s; }
+        /* HEADER SOCIAL ICONS */
+        .header-social {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-social .social-link {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.95rem;
+            text-decoration: none;
+            color: #fff;
+            transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
+        }
+        .header-social .social-link i {
+            color: #fff;
+            transition: transform .3s;
+        }
+        .header-social .social-link:hover {
+            transform: translateY(-3px) scale(1.08);
+        }
+        .header-social .social-link:hover i {
+            transform: scale(1.15);
+        }
+
+        /* Instagram */
+        .header-social .social-link.instagram {
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            box-shadow: 0 4px 12px rgba(214, 36, 159, .3);
+        }
+        .header-social .social-link.instagram:hover {
+            box-shadow: 0 8px 20px rgba(214, 36, 159, .55);
+        }
+
+        /* TikTok */
+        .header-social .social-link.tiktok {
+            background: #000000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+        }
+        .header-social .social-link.tiktok i {
+            text-shadow:
+                -1.5px -1.5px 0 rgba(37, 244, 238, .9),
+                 1.5px  1.5px 0 rgba(254, 44, 85, .9);
+        }
+        .header-social .social-link.tiktok:hover {
+            box-shadow: 0 8px 20px rgba(37, 244, 238, .4), 0 8px 20px rgba(254, 44, 85, .4);
+        }
+
+        /* Facebook */
+        .header-social .social-link.facebook {
+            background: #1877F2;
+            box-shadow: 0 4px 12px rgba(24, 119, 242, .4);
+        }
+        .header-social .social-link.facebook:hover {
+            background: #0e63d6;
+            box-shadow: 0 8px 20px rgba(24, 119, 242, .55);
+        }
+
+        .header-controls { display: flex; gap: 8px; align-items: center; }
+        .icon-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-main); width: 38px; height: 38px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.3s; }
         .icon-btn:hover { border-color: var(--accent); color: var(--accent); }
-        .lang-btn { width: auto; padding: 0 15px; font-family: 'Outfit', sans-serif; font-weight: 600; }
+        .lang-btn { width: auto; padding: 0 12px; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.85rem; }
 
+        /* HERO */
         .hero { min-height: 100vh; padding: 120px 5% 60px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .hero-logo { width: 220px; background: var(--logo-bg); padding: var(--logo-padding); border-radius: 12px; margin-bottom: 30px; animation: float 4s ease-in-out infinite; filter: var(--logo-filter); transition: 0.3s; }
         @keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0); } }
@@ -94,14 +156,6 @@
         .btn-primary:hover { background: var(--accent); color: #111; transform: translateY(-5px); }
         .btn-wa { background: var(--whatsapp); color: #fff; }
         .btn-wa:hover { background: #1eb955; transform: translateY(-5px); }
-
-        .hero-social {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 18px;
-            margin-top: 40px;
-        }
 
         .marquee-container { width: 100%; overflow: hidden; background: var(--accent); color: #111; padding: 15px 0; display: flex; white-space: nowrap; border-top: 2px solid #111; border-bottom: 2px solid #111; }
         .marquee-content { display: flex; animation: marquee 15s linear infinite; }
@@ -161,80 +215,7 @@
         .product-btn span { display: none; }
         @media (min-width: 1024px) { .product-btn span { display: inline; } }
 
-        /* =========================================
-           SOCIAL ICONS — REAL BRAND COLORS
-           (same in dark & light mode)
-           ========================================= */
-        .social-links {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .social-link {
-            position: relative;
-            width: 62px;
-            height: 62px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.55rem;
-            text-decoration: none;
-            border: none;
-            transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s;
-            color: #fff; /* white icon always */
-        }
-
-        .social-link i {
-            color: #fff;
-            transition: transform .35s cubic-bezier(.34,1.56,.64,1);
-        }
-
-        .social-link:hover {
-            transform: translateY(-8px) scale(1.06);
-        }
-        .social-link:hover i {
-            transform: scale(1.12);
-        }
-
-        /* Instagram — real gradient */
-        .social-link.instagram {
-            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-            box-shadow: 0 6px 20px rgba(214, 36, 159, .35);
-        }
-        .social-link.instagram:hover {
-            box-shadow: 0 14px 32px rgba(214, 36, 159, .55);
-        }
-
-        /* TikTok — real black with subtle cyan/pink shadow */
-        .social-link.tiktok {
-            background: #000000;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, .35);
-        }
-        .social-link.tiktok i {
-            color: #fff;
-            text-shadow:
-                -2px -2px 0 rgba(37, 244, 238, .9),
-                 2px  2px 0 rgba(254, 44, 85, .9);
-        }
-        .social-link.tiktok:hover {
-            box-shadow: 0 14px 32px rgba(37, 244, 238, .35), 0 14px 32px rgba(254, 44, 85, .35);
-        }
-
-        /* Facebook — real blue */
-        .social-link.facebook {
-            background: #1877F2;
-            box-shadow: 0 6px 20px rgba(24, 119, 242, .4);
-        }
-        .social-link.facebook:hover {
-            background: #0e63d6;
-            box-shadow: 0 14px 32px rgba(24, 119, 242, .55);
-        }
-
-        /* FOOTER social — real brand colors too */
+        /* FOOTER social — real brand colors */
         .footer-social {
             display: flex;
             justify-content: center;
@@ -284,12 +265,17 @@
         .bottom-nav-item.active { color: var(--accent); }
         .bottom-nav-item i { font-size: 1.4rem; }
         
+        @media (max-width: 767px) { 
+            body { padding-bottom: 70px; }
+            .header-social { gap: 6px; }
+            .header-social .social-link { width: 34px; height: 34px; font-size: 0.85rem; }
+            .icon-btn { width: 34px; height: 34px; }
+            .logo-container img { height: 32px; }
+        }
         @media (min-width: 768px) {
             .mobile-bottom-nav { display: none; }
             body { padding-bottom: 0; }
-            .desktop-nav { display: flex; }
         }
-        @media (max-width: 767px) { body { padding-bottom: 70px; } }
 
         .desktop-fab-container { display: none; position: fixed; bottom: 30px; right: 30px; flex-direction: column; gap: 15px; z-index: 999; }
         @media (min-width: 768px) { .desktop-fab-container { display: flex; } }
@@ -307,11 +293,20 @@
 
     <header>
         <div class="logo-container"><img src="logo.png" alt="Vision Storm"></div>
-        <nav class="desktop-nav">
-            <a href="#home" data-i18n="nav_home">Home</a>
-            <a href="#services" data-i18n="nav_services">Services</a>
-            <a href="#products" data-i18n="nav_products">Products</a>
-        </nav>
+
+        <!-- SOCIAL ICONS IN TOPBAR -->
+        <div class="header-social">
+            <a href="https://www.instagram.com/visionstorm.sa" target="_blank" rel="noopener" class="social-link instagram" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.tiktok.com/@visionstorm.sa" target="_blank" rel="noopener" class="social-link tiktok" aria-label="TikTok">
+                <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://www.facebook.com/share/1E7E3424XD/" target="_blank" rel="noopener" class="social-link facebook" aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+        </div>
+
         <div class="header-controls">
             <button class="icon-btn" id="theme-toggle"><i class="fa-solid fa-moon"></i></button>
             <button class="icon-btn lang-btn" id="lang-toggle" data-i18n="lang_btn">عربي</button>
@@ -325,19 +320,6 @@
         <div class="hero-btns">
             <a href="#quote" class="btn btn-primary" data-i18n="btn_start">Start a Project</a>
             <a href="https://wa.me/966536801025" target="_blank" class="btn btn-wa"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="btn_wa">WhatsApp Us</span></a>
-        </div>
-
-        <!-- SOCIAL ICONS -->
-        <div class="social-links hero-social">
-            <a href="https://www.instagram.com/visionstorm.sa" target="_blank" rel="noopener" class="social-link instagram" aria-label="Instagram">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://www.tiktok.com/@visionstorm.sa" target="_blank" rel="noopener" class="social-link tiktok" aria-label="TikTok">
-                <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://www.facebook.com/share/1E7E3424XD/" target="_blank" rel="noopener" class="social-link facebook" aria-label="Facebook">
-                <i class="fa-brands fa-facebook-f"></i>
-            </a>
         </div>
     </section>
 
