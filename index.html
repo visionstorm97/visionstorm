@@ -161,12 +161,12 @@
             width: 100%;
             background: #0f0f11;
             border-bottom: 1px solid var(--border);
-            border-radius: 20px 20px 0 0; /* Match card corners */
+            border-radius: 20px 20px 0 0;
         }
 
         .product-slider {
             width: 100%; 
-            aspect-ratio: 1 / 1; /* Square on mobile for clean look */
+            aspect-ratio: 1 / 1;
             display: flex; 
             overflow-x: auto; 
             scroll-snap-type: x mandatory;
@@ -176,7 +176,7 @@
 
         .product-slider img {
             width: 100%; height: 100%; 
-            object-fit: cover; /* Fill the square nicely */
+            object-fit: cover;
             flex-shrink: 0; 
             scroll-snap-align: center;
         }
@@ -260,7 +260,7 @@
         }
         
         .product-desc { 
-            display: none; /* Hide desc on mobile to keep cards small */
+            display: none;
             color: var(--text-muted); 
             font-size: 0.9rem; 
             margin-bottom: 15px; 
@@ -298,6 +298,126 @@
         /* Hide text inside button on mobile */
         .product-btn span { display: none; }
         @media (min-width: 1024px) { .product-btn span { display: inline; } }
+
+        /* =========================================
+           SOCIAL MEDIA
+           ========================================= */
+        .social-section {
+            padding: 80px 5% 70px;
+            text-align: center;
+            background: var(--bg-main);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            --brand-grad: var(--accent);
+            --brand-glow: var(--accent-glow);
+            position: relative;
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.7rem;
+            text-decoration: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            transition: transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .4s, border-color .4s;
+            isolation: isolate;
+        }
+
+        .social-link i {
+            position: relative;
+            z-index: 2;
+            transition: color .35s ease, transform .4s cubic-bezier(.34,1.56,.64,1);
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: var(--brand-grad);
+            transform: scale(.2);
+            opacity: 0;
+            transition: transform .45s cubic-bezier(.34,1.56,.64,1), opacity .35s;
+            z-index: 1;
+        }
+
+        .social-link::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            border: 1px solid var(--brand-glow);
+            opacity: 0;
+            z-index: 0;
+        }
+
+        .social-link:hover {
+            transform: translateY(-8px);
+            border-color: transparent;
+            box-shadow: 0 15px 35px var(--brand-glow);
+        }
+        .social-link:hover::before { transform: scale(1); opacity: 1; }
+        .social-link:hover i { color: #fff; transform: scale(1.12); }
+        .social-link:hover::after { animation: socialRing .9s ease-out; }
+
+        @keyframes socialRing {
+            0%   { opacity: .9; transform: scale(1); }
+            100% { opacity: 0;  transform: scale(1.5); }
+        }
+
+        .social-link.facebook {
+            --brand-grad: linear-gradient(135deg, #1877F2, #0b4db3);
+            --brand-glow: rgba(24, 119, 242, .5);
+        }
+        .social-link.facebook i { color: #1877F2; }
+
+        .social-link.instagram {
+            --brand-grad: linear-gradient(45deg, #f9ce34, #ee2a7b 50%, #6228d7);
+            --brand-glow: rgba(238, 42, 123, .5);
+        }
+        .social-link.instagram i { color: #ee2a7b; }
+
+        .social-link.tiktok {
+            --brand-grad: linear-gradient(135deg, #25F4EE, #010101 50%, #FE2C55);
+            --brand-glow: rgba(254, 44, 85, .5);
+        }
+        .social-link.tiktok i { color: #25F4EE; }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+        .footer-social a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .12);
+            color: #b9b9c4;
+            font-size: 1.05rem;
+            text-decoration: none;
+            transition: .3s;
+        }
+        .footer-social a:hover { transform: translateY(-4px); color: #fff; }
+        .footer-social a.instagram:hover { background: linear-gradient(45deg, #f9ce34, #ee2a7b 50%, #6228d7); border-color: transparent; }
+        .footer-social a.tiktok:hover    { background: #010101; border-color: #25F4EE; box-shadow: 0 0 15px rgba(37, 244, 238, .45); }
+        .footer-social a.facebook:hover  { background: #1877F2; border-color: transparent; }
 
         /* MOBILE NAV & FABS */
         .mobile-bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 10, 12, 0.95); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 10px 0; z-index: 1000; padding-bottom: env(safe-area-inset-bottom); }
@@ -397,7 +517,6 @@
             <h2 data-i18n="prod_title">Our Products</h2>
         </div>
         
-        <!-- The New 2-Column Grid -->
         <div class="products-grid">
             
             <!-- PRODUCT 1 -->
@@ -570,11 +689,35 @@
         </div>
     </section>
 
+    <!-- SOCIAL MEDIA SECTION -->
+    <section id="social" class="social-section">
+        <div class="section-header" style="margin-bottom: 35px;">
+            <p data-i18n="social_sub">Stay Connected</p>
+            <h2 data-i18n="social_title">Follow Us</h2>
+        </div>
+        <div class="social-links">
+            <a href="https://www.instagram.com/visionstorm.sa" target="_blank" rel="noopener" class="social-link instagram" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.tiktok.com/@visionstorm.sa" target="_blank" rel="noopener" class="social-link tiktok" aria-label="TikTok">
+                <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://www.facebook.com/share/1E7E3424XD/" target="_blank" rel="noopener" class="social-link facebook" aria-label="Facebook">
+                <i class="fa-brands fa-facebook-f"></i>
+            </a>
+        </div>
+    </section>
+
     <footer>
         <a href="https://maps.app.goo.gl/tmQWSedrD4iPHsut5?g_st=awb" target="_blank" class="map-wrapper">
             <iframe src="https://maps.google.com/maps?q=Vision%20Storm%20Saudi%20Arabia&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
         </a>
         <div style="padding: 30px; background: #000;">
+            <div class="footer-social">
+                <a href="https://www.instagram.com/visionstorm.sa" target="_blank" rel="noopener" class="instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@visionstorm.sa" target="_blank" rel="noopener" class="tiktok" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://www.facebook.com/share/1E7E3424XD/" target="_blank" rel="noopener" class="facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            </div>
             <p>&copy; 2026 Vision Storm. All Rights Reserved.</p>
         </div>
     </footer>
@@ -637,6 +780,7 @@
                 p6_t: "Brochures & Menus", p6_d: "High-quality brochures, menus, and catalogs printed on premium paper.",
                 p7_t: "Die-Cut Stickers", p7_d: "Custom shaped die-cut stickers with vibrant colors.",
                 p8_t: "3D Letters", p8_d: "Stainless steel and acrylic 3D letters for premium signage.",
+                social_sub: "Stay Connected", social_title: "Follow Us",
                 lang_btn: "عربي"
             },
             ar: {
@@ -659,6 +803,7 @@
                 p6_t: "بروشورات ومنيوهات", p6_d: "بروشورات، منيوهات، وكتالوجات عالية الجودة مطبوعة على ورق فاخر.",
                 p7_t: "ملصقات بقص خاص", p7_d: "ملصقات مقطوعة بأشكال مخصصة بألوان نابضة بالحياة.",
                 p8_t: "حروف بارزة 3D", p8_d: "حروف ثلاثية الأبعاد من الستانلس ستيل والأكريليك للافتات الشركات الفاخرة.",
+                social_sub: "ابقَ على تواصل", social_title: "تابعنا",
                 lang_btn: "EN"
             }
         };
