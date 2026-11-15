@@ -63,82 +63,125 @@
             font-weight: 700;
         }
 
-        /* HEADER */
         header {
             position: fixed; top: 0; left: 0; width: 100%; padding: 12px 5%;
             display: flex; justify-content: space-between; align-items: center;
             background: rgba(10, 10, 12, 0.85); backdrop-filter: blur(15px); z-index: 1000;
             border-bottom: 1px solid var(--border);
-            gap: 15px;
+            gap: 12px;
         }
         body.light-mode header { background: rgba(244, 244, 246, 0.85); }
         .logo-container img { height: 40px; background: var(--logo-bg); padding: var(--logo-padding); border-radius: 8px; object-fit: contain; filter: var(--logo-filter); transition: 0.3s; }
 
-        /* HEADER SOCIAL ICONS */
+        /* =========================================
+           OUTLINE SOCIAL ICONS — Brand-colored
+           icon + gradient border, fills on hover
+           ========================================= */
         .header-social {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 9px;
         }
 
         .header-social .social-link {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
+            --brand-grad: var(--accent);
+            --brand-color: var(--accent);
+            --brand-glow: var(--accent-glow);
+            position: relative;
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             text-decoration: none;
-            color: #fff;
-            transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
+            background: var(--bg-card);
+            transition: transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .4s;
+            isolation: isolate;
+            overflow: hidden;
         }
+
+        /* Gradient border (donut) */
+        .header-social .social-link::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1.5px;
+            background: var(--brand-grad);
+            -webkit-mask:
+                linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+                    mask-composite: exclude;
+            pointer-events: none;
+            z-index: 1;
+            transition: opacity .35s;
+        }
+
+        /* Fill on hover */
+        .header-social .social-link::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: var(--brand-grad);
+            opacity: 0;
+            transition: opacity .35s ease;
+            z-index: 0;
+        }
+
         .header-social .social-link i {
-            color: #fff;
-            transition: transform .3s;
+            position: relative;
+            z-index: 2;
+            color: var(--brand-color);
+            transition: color .35s ease, transform .45s cubic-bezier(.34,1.56,.64,1);
         }
+
         .header-social .social-link:hover {
-            transform: translateY(-3px) scale(1.08);
+            transform: translateY(-5px) scale(1.08);
+            box-shadow: 0 12px 26px var(--brand-glow);
         }
+        .header-social .social-link:hover::after { opacity: 1; }
         .header-social .social-link:hover i {
-            transform: scale(1.15);
+            color: #fff;
+            transform: scale(1.12) rotate(-6deg);
         }
 
-        /* Instagram */
+        /* INSTAGRAM */
         .header-social .social-link.instagram {
-            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-            box-shadow: 0 4px 12px rgba(214, 36, 159, .3);
-        }
-        .header-social .social-link.instagram:hover {
-            box-shadow: 0 8px 20px rgba(214, 36, 159, .55);
+            --brand-grad: linear-gradient(45deg, #f09433, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888);
+            --brand-color: #e1306c;
+            --brand-glow: rgba(225, 48, 108, .5);
         }
 
-        /* TikTok */
+        /* TIKTOK */
         .header-social .social-link.tiktok {
-            background: #000000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, .3);
+            --brand-grad: linear-gradient(135deg, #25F4EE, #FE2C55);
+            --brand-color: #25F4EE;
+            --brand-glow: rgba(37, 244, 238, .45);
         }
         .header-social .social-link.tiktok i {
             text-shadow:
-                -1.5px -1.5px 0 rgba(37, 244, 238, .9),
-                 1.5px  1.5px 0 rgba(254, 44, 85, .9);
+                -1.2px -1.2px 0 rgba(37, 244, 238, .75),
+                 1.2px  1.2px 0 rgba(254, 44, 85, .75);
         }
-        .header-social .social-link.tiktok:hover {
-            box-shadow: 0 8px 20px rgba(37, 244, 238, .4), 0 8px 20px rgba(254, 44, 85, .4);
+        .header-social .social-link.tiktok:hover i {
+            text-shadow:
+                -1.2px -1.2px 0 #25F4EE,
+                 1.2px  1.2px 0 #FE2C55;
         }
 
-        /* Facebook */
+        /* FACEBOOK */
         .header-social .social-link.facebook {
-            background: #1877F2;
-            box-shadow: 0 4px 12px rgba(24, 119, 242, .4);
-        }
-        .header-social .social-link.facebook:hover {
-            background: #0e63d6;
-            box-shadow: 0 8px 20px rgba(24, 119, 242, .55);
+            --brand-grad: linear-gradient(135deg, #4293ff, #1877F2 50%, #0b4db3);
+            --brand-color: #1877F2;
+            --brand-glow: rgba(24, 119, 242, .5);
         }
 
         .header-controls { display: flex; gap: 8px; align-items: center; }
-        .icon-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-main); width: 38px; height: 38px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.3s; }
+        .icon-btn { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-main); width: 38px; height: 38px; border-radius: 12px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.3s; }
         .icon-btn:hover { border-color: var(--accent); color: var(--accent); }
         .lang-btn { width: auto; padding: 0 12px; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.85rem; }
 
@@ -215,7 +258,7 @@
         .product-btn span { display: none; }
         @media (min-width: 1024px) { .product-btn span { display: inline; } }
 
-        /* FOOTER social — real brand colors */
+        /* FOOTER SOCIAL — same outline style */
         .footer-social {
             display: flex;
             justify-content: center;
@@ -223,40 +266,86 @@
             margin-bottom: 22px;
         }
         .footer-social a {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
+            --brand-grad: var(--accent);
+            --brand-color: var(--accent);
+            --brand-glow: var(--accent-glow);
+            position: relative;
+            width: 48px;
+            height: 48px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.05rem;
+            font-size: 1.15rem;
             text-decoration: none;
-            color: #fff;
-            transition: transform .3s, box-shadow .3s;
+            background: rgba(255, 255, 255, .04);
+            transition: transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .4s;
+            isolation: isolate;
+            overflow: hidden;
         }
-        .footer-social a i { color: #fff; }
-        .footer-social a:hover { transform: translateY(-4px) scale(1.06); }
+        .footer-social a::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1.5px;
+            background: var(--brand-grad);
+            -webkit-mask:
+                linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+                    mask-composite: exclude;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .footer-social a::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: var(--brand-grad);
+            opacity: 0;
+            transition: opacity .35s ease;
+            z-index: 0;
+        }
+        .footer-social a i {
+            position: relative;
+            z-index: 2;
+            color: var(--brand-color);
+            transition: color .35s ease, transform .45s cubic-bezier(.34,1.56,.64,1);
+        }
+        .footer-social a:hover {
+            transform: translateY(-5px) scale(1.08);
+            box-shadow: 0 12px 26px var(--brand-glow);
+        }
+        .footer-social a:hover::after { opacity: 1; }
+        .footer-social a:hover i { color: #fff; transform: scale(1.12) rotate(-6deg); }
 
         .footer-social a.instagram {
-            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            --brand-grad: linear-gradient(45deg, #f09433, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888);
+            --brand-color: #e1306c;
+            --brand-glow: rgba(225, 48, 108, .5);
         }
-        .footer-social a.instagram:hover { box-shadow: 0 8px 20px rgba(214, 36, 159, .5); }
-
         .footer-social a.tiktok {
-            background: #000000;
-            border: 1px solid rgba(255,255,255,.15);
+            --brand-grad: linear-gradient(135deg, #25F4EE, #FE2C55);
+            --brand-color: #25F4EE;
+            --brand-glow: rgba(37, 244, 238, .45);
         }
         .footer-social a.tiktok i {
             text-shadow:
-                -1.5px -1.5px 0 rgba(37, 244, 238, .9),
-                 1.5px  1.5px 0 rgba(254, 44, 85, .9);
+                -1.2px -1.2px 0 rgba(37, 244, 238, .75),
+                 1.2px  1.2px 0 rgba(254, 44, 85, .75);
         }
-        .footer-social a.tiktok:hover { box-shadow: 0 8px 20px rgba(37, 244, 238, .4); }
-
+        .footer-social a.tiktok:hover i {
+            text-shadow:
+                -1.2px -1.2px 0 #25F4EE,
+                 1.2px  1.2px 0 #FE2C55;
+        }
         .footer-social a.facebook {
-            background: #1877F2;
+            --brand-grad: linear-gradient(135deg, #4293ff, #1877F2 50%, #0b4db3);
+            --brand-color: #1877F2;
+            --brand-glow: rgba(24, 119, 242, .5);
         }
-        .footer-social a.facebook:hover { background: #0e63d6; box-shadow: 0 8px 20px rgba(24, 119, 242, .5); }
 
         /* MOBILE NAV & FABS */
         .mobile-bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(10, 10, 12, 0.95); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 10px 0; z-index: 1000; padding-bottom: env(safe-area-inset-bottom); }
@@ -268,8 +357,8 @@
         @media (max-width: 767px) { 
             body { padding-bottom: 70px; }
             .header-social { gap: 6px; }
-            .header-social .social-link { width: 34px; height: 34px; font-size: 0.85rem; }
-            .icon-btn { width: 34px; height: 34px; }
+            .header-social .social-link { width: 38px; height: 38px; font-size: 0.95rem; border-radius: 11px; }
+            .icon-btn { width: 36px; height: 36px; }
             .logo-container img { height: 32px; }
         }
         @media (min-width: 768px) {
@@ -294,7 +383,6 @@
     <header>
         <div class="logo-container"><img src="logo.png" alt="Vision Storm"></div>
 
-        <!-- SOCIAL ICONS IN TOPBAR -->
         <div class="header-social">
             <a href="https://www.instagram.com/visionstorm.sa" target="_blank" rel="noopener" class="social-link instagram" aria-label="Instagram">
                 <i class="fa-brands fa-instagram"></i>
